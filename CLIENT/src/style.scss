@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@font-face {
+  font-family: "Brutal";
+  src: url(/public/ASSETS/FONTS/BrutalType-Bold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Brutal";
+  src: url(/public/ASSETS/FONTS/BrutalType-Medium.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Brutal";
+  src: url(/public/ASSETS/FONTS/BrutalType-Thin.ttf);
+  font-weight: 300;
+}
+
+* {
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: "Brutal";
+  font-weight: 400;
+}
