@@ -2,14 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Auth from "@/PAGES/Auth";
 
 import "./style.scss";
 
 const App = () => {
-  React.useEffect(() => {}, []);
-
-  return <div className="App">SNAP-SAP</div>;
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
+    </div>
+  );
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
