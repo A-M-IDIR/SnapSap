@@ -1,0 +1,103 @@
+.AuthSkeleton {
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  padding-bottom: 0;
+
+  header,
+  footer {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+  }
+
+  header {
+    justify-content: center;
+  }
+
+  footer {
+    justify-content: space-between;
+
+    padding-bottom: 15px;
+
+    aside {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+  }
+
+  .Form {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    width: 480px;
+    margin-bottom: 5rem;
+    padding: 20px;
+    // padding-bottom: 65px;
+
+    border-radius: 0.2rem;
+    background-color: white;
+
+    .Field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      width: 100%;
+
+      aside {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+    }
+  }
+}
+
+.BackGroundSkeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100dvw;
+  height: 100dvh;
+
+  .Blur {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    backdrop-filter: blur(15px);
+  }
+
+  img {
+    position: relative;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+}
