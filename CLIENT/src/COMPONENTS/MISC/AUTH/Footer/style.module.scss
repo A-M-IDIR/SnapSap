@@ -1,0 +1,46 @@
+.Footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  width: 100%;
+  padding-bottom: 15px;
+
+  user-select: none;
+
+  .CallToAction,
+  .Link {
+    color: rgb(75, 75, 75);
+
+    font-size: 0.9rem;
+  }
+
+  .Link {
+    color: rgb(80, 65, 195);
+
+    text-decoration: underline;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: rgb(45, 45, 160);
+    }
+
+    &:active {
+      color: rgb(65, 65, 255);
+    }
+  }
+
+  aside {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    padding: 0.1rem 0.2rem;
+
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 0.1rem;
+  }
+}
