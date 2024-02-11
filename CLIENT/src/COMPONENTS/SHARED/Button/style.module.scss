@@ -1,0 +1,50 @@
+.Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9rem;
+
+  min-width: max-content;
+  height: 2.2rem;
+  padding: 0 1rem;
+
+  background-color: rgb(125, 125, 255);
+  color: rgb(255, 255, 255);
+  border-radius: 0.2rem;
+  outline: none;
+  border: none;
+
+  font-size: 0.75rem;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: 0.2s all ease;
+
+  &:hover {
+    background-color: rgb(100, 100, 255);
+    color: rgb(255, 255, 255);
+
+    svg {
+      fill: white;
+    }
+  }
+
+  &:active {
+    background-color: rgb(125, 125, 255);
+  }
+
+  svg {
+    width: 14px;
+
+    fill: white;
+
+    transition: 0.15s all ease;
+  }
+}
+
+.IconButton {
+  width: 2.5rem;
+  height: 2.4rem;
+  padding: 0;
+}

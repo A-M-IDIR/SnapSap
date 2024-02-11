@@ -1,13 +1,14 @@
 import React from "react";
 
+import { AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-import { AuthLayout } from "@/COMPONENTS/LAYOUT/AuthLayout";
+import Login from "@/COMPONENTS/MISC/AUTH/Login";
+import Register from "@/COMPONENTS/MISC/AUTH/Register";
+import BackGround from "@/COMPONENTS/MISC/AUTH/BackGround";
 
 const StyledAuth = styled.div`
-  overflow-y: auto;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,10 +16,6 @@ const StyledAuth = styled.div`
 
   width: 100dvw;
   height: 100dvh;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 
   span {
     margin: 0 0.5rem;
@@ -29,8 +26,8 @@ function Auth() {
   const [section, setSection] = React.useState(null);
 
   const sections = {
-    login: <AuthLayout.LoginSkeleton />,
-    register: <AuthLayout.SignUpSkeleton />,
+    login: <Login key={"LOGIN"} />,
+    register: <Register key={"REGISTER"} />,
   };
 
   const navigate = useNavigate();
@@ -48,9 +45,9 @@ function Auth() {
 
   return (
     <StyledAuth>
-      {sections[section]}
+      <AnimatePresence mode="wait">{sections[section]}</AnimatePresence>
 
-      <AuthLayout.BackGroundSkeleton />
+      <BackGround />
     </StyledAuth>
   );
 }
