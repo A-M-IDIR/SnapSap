@@ -4,6 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import { HomeLayout } from "@/COMPONENTS/LAYOUT/HomeLayout";
+import SideBar from "@/COMPONENTS/MISC/HOME/SideBar";
+import NavBar from "@/COMPONENTS/MISC/HOME/NavBar";
+import ProjectList from "@/COMPONENTS/MISC/HOME/ProjectList";
 
 const StyledHome = styled.div`
   overflow: hidden;
@@ -29,7 +32,7 @@ function Home() {
   const [section, setSection] = React.useState(null);
 
   const sections = {
-    projects: <HomeLayout.ProjectListSkeleton />,
+    projects: <ProjectList />,
     archives: <HomeLayout.ArchiveListSkeleton />,
     trash: <HomeLayout.TrashListSkeleton />,
   };
@@ -49,10 +52,10 @@ function Home() {
 
   return (
     <StyledHome>
-      <HomeLayout.SideBarSkeleton />
+      <SideBar />
 
       <section>
-        <HomeLayout.NavBarSkeleton />
+        <NavBar />
 
         {sections[section]}
       </section>
