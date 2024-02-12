@@ -1,0 +1,72 @@
+.SideBar {
+  position: relative;
+  z-index: 8;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  width: 60px;
+  min-width: 60px;
+  height: 100vh;
+  padding: 20px 0px;
+  padding-top: 10px;
+
+  background-color: #f4f5f7;
+  border-right: 1.6px solid rgb(220, 220, 220);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .Logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 34px;
+
+    svg {
+      width: 100%;
+    }
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+
+    .Link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 38px;
+      height: 38px;
+
+      background-color: rgb(238, 238, 238);
+      border-radius: 0.1rem;
+
+      cursor: pointer;
+
+      svg {
+        width: 18px;
+
+        fill: rgb(190, 190, 190);
+
+        transition: 0.15s all ease;
+      }
+    }
+
+    .SelectedLink {
+      background-color: rgb(210, 230, 255);
+
+      svg {
+        fill: rgb(74, 97, 250);
+      }
+    }
+  }
+}

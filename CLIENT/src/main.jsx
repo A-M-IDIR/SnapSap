@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Auth from "@/PAGES/Auth";
+import Home from "@/PAGES/Home";
 
 import "./style.scss";
 
@@ -13,6 +14,8 @@ const App = () => {
     <div className="App">
       <Routes>
         <Route path="/auth" element={<Auth />} />
+
+        <Route path="/home" element={<Home />} />
       </Routes>
     </div>
   );

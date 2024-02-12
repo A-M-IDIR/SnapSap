@@ -1,0 +1,58 @@
+.SearchBar {
+  position: relative;
+
+  input {
+    width: 260px;
+    height: 36px;
+    padding: 0 0.5rem;
+
+    border-radius: 0.2rem;
+    background-color: white;
+    border: 2px solid rgb(220, 220, 220);
+    color: rgb(70, 70, 70);
+    outline: none;
+
+    font-size: 0.8rem;
+
+    transition: 0.2s all ease;
+
+    &::placeholder {
+      color: rgb(215, 215, 215);
+
+      transition: 0.2s all ease;
+    }
+
+    &:hover {
+      background-color: rgb(245, 245, 245);
+    }
+
+    &:focus {
+      border-color: rgb(170, 170, 255);
+
+      &::placeholder {
+        color: rgb(200, 200, 200);
+      }
+    }
+  }
+
+  .Icon {
+    position: absolute;
+    top: 50%;
+    right: 0.8rem;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: max-content;
+
+    pointer-events: none;
+
+    svg {
+      width: 14px;
+
+      fill: rgb(190, 190, 190);
+    }
+  }
+}

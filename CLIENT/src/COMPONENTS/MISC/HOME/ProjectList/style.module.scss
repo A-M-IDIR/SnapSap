@@ -1,0 +1,90 @@
+.ProjectList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 0;
+
+    aside {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      width: 100%;
+
+      .Label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.2rem;
+
+        user-select: none;
+
+        .Icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          width: 34px;
+          height: 34px;
+
+          background-color: rgb(235, 235, 235);
+          border-radius: 0.2rem;
+
+          svg {
+            width: 12.5px;
+
+            fill: rgb(180, 180, 180);
+          }
+        }
+
+        p {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          height: 34px;
+          padding: 0 1rem;
+
+          background-color: rgb(235, 235, 235);
+          border-radius: 0.2rem;
+          color: rgb(170, 170, 170);
+
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    sub {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      @media screen and (max-width: 600px) {
+        justify-content: space-between;
+
+        width: 100%;
+      }
+    }
+  }
+
+  .Content {
+    width: 100%;
+
+    padding: 20px;
+    padding-top: 0;
+
+    .Slide {
+      min-width: max-content;
+    }
+  }
+}
