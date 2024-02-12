@@ -1,0 +1,64 @@
+.NavLink {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.7rem;
+
+  height: 38px;
+  padding: 0 0.6rem;
+
+  border-radius: 0.2rem;
+  background-color: rgb(235, 235, 235);
+
+  cursor: pointer;
+
+  transition: 0.15s all ease;
+
+  .Icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 28px;
+
+    svg {
+      width: 22px;
+
+      transition: 0.15s all ease;
+
+      path {
+        fill: rgb(190, 190, 190);
+
+        transition: 0.15s all ease;
+      }
+    }
+  }
+
+  p {
+    color: rgb(140, 140, 140);
+
+    font-size: 0.84rem;
+    font-weight: 450;
+  }
+
+  &:hover {
+    background-color: rgb(230, 230, 230);
+  }
+}
+
+.SelectedLink {
+  background-color: rgb(200, 225, 255);
+
+  .Icon svg path {
+    fill: rgb(95, 115, 250);
+  }
+
+  p {
+    color: rgb(95, 115, 250);
+  }
+
+  &:hover {
+    background-color: rgb(190, 220, 255);
+  }
+}
