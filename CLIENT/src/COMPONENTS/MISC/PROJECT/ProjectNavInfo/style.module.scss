@@ -1,0 +1,43 @@
+.ProjectNavInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  .ProjectImage {
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 0.2rem;
+    background-color: rgb(215, 215, 215);
+
+    img {
+      width: 150%;
+    }
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    .ProjectName {
+      color: rgb(45, 45, 45);
+
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .ProjectCategory {
+      color: rgb(100, 100, 100);
+
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+  }
+}
