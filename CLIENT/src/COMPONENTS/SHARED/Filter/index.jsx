@@ -7,7 +7,7 @@ import { SvgHandler } from "@/RESOURCES/HANDLERS/SvgHandler";
 import C from "./style.module.scss";
 
 function Filter(props) {
-  const { label, options, dropRight, onSelected } = props;
+  const { label, options, dropRight, onSelected, ...rest } = props;
 
   const [selected, setSelected] = React.useState(null);
   const [isDropDown, setIsDropDown] = React.useState(false);
@@ -46,6 +46,7 @@ function Filter(props) {
         options.length === 1 && C.Center
       }`}
       onClick={handleClick}
+      {...rest}
     >
       <p>{selected ? selected.label : label}</p>
 
@@ -86,11 +87,11 @@ Filter.defaultProps = {
 };
 
 Filter.propTypes = {
-  label: propTypes.string.isRequired,
+  label: propTypes.any.isRequired,
   options: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.string.isRequired,
-      label: propTypes.string.isRequired,
+      label: propTypes.any.isRequired,
     })
   ).isRequired,
   onSelected: propTypes.func,

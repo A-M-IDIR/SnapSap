@@ -32,6 +32,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+
+    svg {
+      fill: rgb(125, 125, 125);
+    }
   }
 
   .Icon {
