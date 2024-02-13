@@ -44,10 +44,10 @@ const StyledIcon = styled.div`
 `;
 
 function SearchBar(props) {
-  const { label, icon, theme, action, ...rest } = props;
+  const { label, icon, theme, action, fullWidth, ...rest } = props;
 
   return (
-    <div className={C.SearchBar}>
+    <div className={C.SearchBar} style={{ width: fullWidth && "100%" }}>
       <StyledInput
         placeholder={label}
         theme={theme}
@@ -70,6 +70,7 @@ SearchBar.defaultProps = {
     hover: {},
     focus: {},
   },
+  fullWidth: false,
 };
 
 SearchBar.propTypes = {
@@ -97,6 +98,7 @@ SearchBar.propTypes = {
       labelColor: propTypes.string,
     }).isRequired,
   }),
+  fullWidth: propTypes.bool,
 };
 
 export default SearchBar;
