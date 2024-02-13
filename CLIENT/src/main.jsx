@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Auth from "@/PAGES/Auth";
 import Home from "@/PAGES/Home";
+import Project from "@/PAGES/Project";
 
 import "./style.scss";
 
@@ -16,6 +17,8 @@ const App = () => {
         <Route path="/auth" element={<Auth />} />
 
         <Route path="/home" element={<Home />} />
+
+        <Route path="/project" element={<Project />} />
       </Routes>
     </div>
   );
