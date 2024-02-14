@@ -1,0 +1,25 @@
+.BoardActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+
+  width: 100%;
+  min-width: max-content;
+  padding: 20px;
+
+  aside {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    min-width: max-content;
+  }
+
+  .Left {
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 250px;
+  }
+}
