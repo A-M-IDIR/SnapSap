@@ -4,6 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import { ProjectLayout } from "@/COMPONENTS/LAYOUT/ProjectLayout";
+import ActionBar from "@/COMPONENTS/MISC/PROJECT/ActionBar";
+import ProjectNavLarge from "@/COMPONENTS/MISC/PROJECT/ProjectNavLarge";
+import BackLog from "@/COMPONENTS/MISC/PROJECT/BackLog";
+import KanBan from "@/COMPONENTS/MISC/PROJECT/KanBan";
 
 const StyledProject = styled.div`
   overflow: hidden;
@@ -33,8 +37,8 @@ function Project() {
   const [section, setSection] = React.useState(null);
 
   const sections = {
-    backlog: <ProjectLayout.BackLogSkeleton />,
-    board: <ProjectLayout.BoardSkeleton />,
+    backlog: <BackLog />,
+    board: <KanBan />,
     settings: <ProjectLayout.ProjectSettingsSkeleton />,
   };
 
@@ -59,10 +63,10 @@ function Project() {
 
   return (
     <StyledProject>
-      <ProjectLayout.ActionBarSkeleton />
+      <ActionBar />
 
       <div className="ProjectContent">
-        <ProjectLayout.ProjectNavLargeSkeleton />
+        <ProjectNavLarge />
 
         <ProjectLayout.ProjectNavSmallSkeleton />
 
