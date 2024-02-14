@@ -1,0 +1,121 @@
+.BoardTask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  margin-bottom: 0.5rem;
+
+  background-color: white;
+  outline: 2px solid rgb(240, 240, 240);
+  border-radius: 0.2rem;
+
+  cursor: pointer;
+  pointer-events: all;
+  user-select: none;
+
+  transition: 0.2s all ease;
+
+  &:hover {
+    background-color: rgb(250, 250, 250);
+  }
+
+  &:active {
+    background-color: rgb(250, 250, 250);
+
+    transform: rotate(2deg);
+  }
+
+  .Content {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    padding: 0.5rem;
+
+    p {
+      min-height: 20px;
+
+      color: rgb(60, 60, 60);
+
+      font-weight: 400;
+      font-size: 0.78rem;
+    }
+  }
+
+  .Footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: 0.7rem 0.5rem;
+
+    border-top: 2px solid rgb(240, 240, 240);
+
+    .Assignees {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .Assignee {
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 22px;
+        height: 22px;
+
+        outline: 2px solid rgb(215, 215, 215);
+        border-radius: 50%;
+
+        img {
+          width: 100%;
+
+          background-color: rgb(240, 240, 240);
+        }
+      }
+    }
+
+    aside {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.3rem;
+
+      .DueTime {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+
+        height: 20px;
+        padding: 0 0.3rem;
+
+        border-radius: 0.15rem;
+        outline: 2px solid rgb(240, 240, 240);
+
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            width: 11px;
+
+            fill: rgb(190, 190, 190);
+          }
+        }
+
+        p {
+          color: rgb(65, 65, 65);
+
+          font-weight: 500;
+          font-size: 0.68rem;
+        }
+      }
+    }
+  }
+}
