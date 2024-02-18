@@ -6,12 +6,14 @@ ENV.config();
 /****************** SHARED DEPENDENCIES ******************/
 
 /****************** SERVER LAUNCH ******************/
-import EXPRESS, { Request, Response } from "express";
+import EXPRESS from "express";
 import HTTP from "http";
 import CORS from "cors";
-import Error from "./UTILS/MIDDLEWARE/Error.js";
+import Error from "./UTILS/MIDDLEWARES/Error.js";
+import { RouterHandler } from "./UTILS/HANDLERS/RouterHandler.js";
 
 const PORT = process.env.PORT || 5000;
+const APP_NAME = "SNAP-SAP";
 const BASE_ROUTE = "/";
 
 const APP = EXPRESS();
@@ -24,19 +26,19 @@ APP.use(
   })
 );
 
-APP.get(BASE_ROUTE, (req: Request, res: Response) => {
-  res.status(200).send("WELCOME TO THE SNAP-SAP API !");
-});
+GreetHandler(APP, BASE_ROUTE, APP_NAME);
+RouterHandler(APP, BASE_ROUTE);
 
 APP.use(Error);
 
 SERVER.listen(PORT, () => {
-  console.log(COLORS.green.underline(`APP STARTED AT PORT :: ${PORT}.`));
+  console.log(COLORS.green.underline(`SERVER STARTED AT PORT :: ${PORT}.`));
 });
 /****************** SERVER LAUNCH ******************/
 
 /****************** DATA-BASE CONN *****************/
 import MONGOOSE from "mongoose";
+import { GreetHandler } from "./UTILS/HANDLERS/GreetHandler.js";
 
 const MONGO_URI = process.env.MONGO_URI;
 
