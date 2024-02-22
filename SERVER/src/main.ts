@@ -20,6 +20,7 @@ const APP = EXPRESS();
 const SERVER = HTTP.createServer(APP);
 
 APP.use(EXPRESS.json());
+APP.use(EXPRESS.urlencoded({ extended: true }));
 APP.use(
   CORS({
     origin: "*",
