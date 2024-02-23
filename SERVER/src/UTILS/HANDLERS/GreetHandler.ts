@@ -1,11 +1,11 @@
 import { Request, Response, Express } from "express";
 import { Routers } from "./RouterHandler.js";
 
-export const GreetHandler = (
+export default function GreetHandler(
   APP: Express,
   BASE_ROUTE: string,
   APP_NAME: string
-) => {
+) {
   APP.get(BASE_ROUTE, (req: Request, res: Response) => {
     let Message = `
     -------------------------------------------------------------
@@ -20,4 +20,4 @@ export const GreetHandler = (
 
     res.status(200).send(Message);
   });
-};
+}

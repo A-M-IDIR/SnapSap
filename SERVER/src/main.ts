@@ -10,7 +10,8 @@ import EXPRESS from "express";
 import HTTP from "http";
 import CORS from "cors";
 import Error from "./UTILS/MIDDLEWARES/Error.js";
-import { RouterHandler } from "./UTILS/HANDLERS/RouterHandler.js";
+import GreetHandler from "./UTILS/HANDLERS/GreetHandler.js";
+import RouterHandler from "./UTILS/HANDLERS/RouterHandler.js";
 
 const PORT = process.env.PORT || 5000;
 const APP_NAME = "SNAP-SAP";
@@ -39,7 +40,6 @@ SERVER.listen(PORT, () => {
 
 /****************** DATA-BASE CONN *****************/
 import MONGOOSE from "mongoose";
-import { GreetHandler } from "./UTILS/HANDLERS/GreetHandler.js";
 
 const MONGO_URI = process.env.MONGO_URI;
 
