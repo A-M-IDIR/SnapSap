@@ -4,6 +4,6 @@ interface LogDocument extends Document {}
 
 const LogSchema = new Schema<LogDocument>({});
 
-const Log = model<LogDocument>("Log", LogSchema);
+const LogModel = model<LogDocument>("Log", LogSchema);
 
-export { Log, LogDocument };
+export { LogModel, LogDocument };

@@ -4,6 +4,6 @@ interface IssueDocument extends Document {}
 
 const IssueSchema = new Schema<IssueDocument>({});
 
-const Issue = model<IssueDocument>("Issue", IssueSchema);
+const IssueModel = model<IssueDocument>("Issue", IssueSchema);
 
-export { Issue, IssueDocument };
+export { IssueModel, IssueDocument };
