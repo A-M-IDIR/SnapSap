@@ -1,9 +1,28 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 
-interface UserDocument extends Document {}
+interface UserDocument {
+  first_name: string;
+  last_name: string;
+  user_name: string;
+  email: string;
+  password: string;
+  verified: boolean;
+  avatar?: string;
+}
 
-const UserSchema = new Schema<UserDocument>({});
+const UserSchema = new Schema<UserDocument>(
+  {
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
+    user_name: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    verified: { type: Boolean, required: true },
+    avatar: { type: String, required: false },
+  },
+  { strict: "throw" }
+);
 
-const User = model<UserDocument>("User", UserSchema);
+const UserModel = model<UserDocument>("User", UserSchema);
 
-export { User, UserDocument };
+export { UserModel, UserDocument };
