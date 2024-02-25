@@ -6,9 +6,9 @@ import {
   Greet,
   Register,
   NewOtp,
-  VerifyUser,
+  Verify,
   Login,
-  GetUser,
+  Get,
 } from "../CONTROLLERS/UserController.js";
 
 const ROUTER = EXPRESS.Router();
@@ -16,8 +16,8 @@ const ROUTER = EXPRESS.Router();
 ROUTER.get("/", Greet);
 ROUTER.post("/register", UserValidator.RegisterValidation, Register);
 ROUTER.post("/otp", UserValidator.NewOtpValidation, NewOtp);
-ROUTER.post("/verify", UserValidator.VerifyUserValidation, VerifyUser);
+ROUTER.post("/verify", UserValidator.VerifyUserValidation, Verify);
 ROUTER.post("/login", UserValidator.LoginValidation, Login);
-ROUTER.get("/self", Auth, GetUser);
+ROUTER.get("/self", Auth, Get);
 
 export { ROUTER as UserRouter };

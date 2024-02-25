@@ -89,7 +89,7 @@ const NewOtp = ASYNC_HANDLER(async (req: Request, res: Response) => {
   res.status(200).json("New OTP Created.");
 });
 
-const VerifyUser = ASYNC_HANDLER(async (req: Request, res: Response) => {
+const Verify = ASYNC_HANDLER(async (req: Request, res: Response) => {
   const { userId, code } = req.body;
 
   const Otp = await OtpModel.findOne({ userId: userId });
@@ -137,10 +137,10 @@ const Login = ASYNC_HANDLER(async (req: Request, res: Response) => {
   });
 });
 
-const GetUser = ASYNC_HANDLER(
+const Get = ASYNC_HANDLER(
   async (req: Request & { user: UserDocument }, res: Response) => {
     res.status(200).json(req.user);
   }
 );
 
-export { Greet, Register, NewOtp, VerifyUser, Login, GetUser };
+export { Greet, Register, NewOtp, Verify, Login, Get };
