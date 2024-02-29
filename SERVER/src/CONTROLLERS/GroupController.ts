@@ -20,4 +20,23 @@ const Greet = (req: Request, res: Response) => {
   res.status(200).send(Response);
 };
 
-export { Greet };
+const Get = ASYNC_HANDLER(async (req: Request, res: Response) => {
+  const { groupId } = req.query;
+
+  if (groupId == "all") {
+    const groups = await GroupModel.find({});
+
+    res.status(200).json(groups);
+    return;
+  }
+
+  const group = await GroupModel.findById(groupId).populate("projects", "-__v");
+
+  if (!group) {
+    ErrorHandler(res, 404, "Group not Found.");
+  }
+
+  res.status(200).json(group);
+});
+
+export { Greet, Get };
