@@ -39,4 +39,18 @@ const Get = ASYNC_HANDLER(async (req: Request, res: Response) => {
   res.status(200).json(group);
 });
 
-export { Greet, Get };
+const Add = ASYNC_HANDLER(
+  async (req: Request & { user: UserDocument }, res: Response) => {
+    const { label, style } = req.body;
+
+    const newGroup = await GroupModel.create({
+      label,
+      style,
+      user: req.user._id,
+    });
+
+    res.status(200).json(newGroup);
+  }
+);
+
+export { Greet, Get, Add };
