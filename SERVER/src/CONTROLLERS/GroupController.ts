@@ -53,4 +53,50 @@ const Add = ASYNC_HANDLER(
   }
 );
 
-export { Greet, Get, Add };
+const Update = ASYNC_HANDLER(
+  async (req: Request & { user: UserDocument }, res: Response) => {
+    const { groupId } = req.query;
+    const { updatedData, addedProjects, deletedProjects } = req.body;
+
+    const group = await GroupModel.findById(groupId);
+
+    if (!group) {
+      ErrorHandler(res, 404, "Group not Found.");
+    }
+
+    if (String(group.user) != String(req.user._id)) {
+      ErrorHandler(res, 401, "You are not authorized to edit this group.");
+    }
+
+    if (addedProjects?.length) {
+      addedProjects.map((newProject) => {
+        if (group.projects.some((project) => String(project) == newProject)) {
+          ErrorHandler(res, 400, "Project already in the group.");
+        }
+
+        group.projects.push(newProject);
+      });
+    }
+
+    if (deletedProjects?.length > 0) {
+      group.projects = group.projects.filter(
+        (project) => !deletedProjects.includes(String(project))
+      );
+    }
+
+    if (updatedData) {
+      Object.assign(group, updatedData);
+    }
+
+    const updatedGroup = await group.save();
+
+    const populatedGroup = await updatedGroup.populate(
+      "projects user",
+      "-password -verified -__v"
+    );
+
+    res.status(200).json(populatedGroup);
+  }
+);
+
+export { Greet, Get, Add, Update };
