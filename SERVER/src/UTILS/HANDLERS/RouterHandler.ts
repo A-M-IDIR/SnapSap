@@ -2,12 +2,14 @@ import { Express } from "express";
 import COLORS from "colors";
 
 import { UserRouter } from "../../ROUTES/UserRoute.js";
+import { GroupRouter } from "../../ROUTES/GroupRoute.js";
 import { ProjectRouter } from "../../ROUTES/ProjectRoute.js";
 import { LogRouter } from "../../ROUTES/LogRoute.js";
 import { IssueRouter } from "../../ROUTES/IssueRoute.js";
 
 export const Routers = {
   user: UserRouter,
+  group: GroupRouter,
   project: ProjectRouter,
   log: LogRouter,
   issue: IssueRouter,
