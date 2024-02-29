@@ -99,4 +99,16 @@ const Update = ASYNC_HANDLER(
   }
 );
 
-export { Greet, Get, Add, Update };
+const Delete = ASYNC_HANDLER(async (req: Request, res: Response) => {
+  const { groupId } = req.query;
+
+  const group = await GroupModel.findByIdAndDelete(groupId);
+
+  if (!group) {
+    ErrorHandler(res, 404, "Group not Found.");
+  }
+
+  res.status(200).json(group);
+});
+
+export { Greet, Get, Add, Update, Delete };
