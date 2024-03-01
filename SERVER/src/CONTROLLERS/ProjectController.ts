@@ -50,4 +50,75 @@ const Add = ASYNC_HANDLER(
   }
 );
 
-export { Greet, Get, Add };
+const Update = ASYNC_HANDLER(
+  async (req: Request & { user: UserDocument }, res: Response) => {
+    const { projectId } = req.query;
+    const { updatedData, addedMembers, deletedMembers } = req.body;
+
+    const project = await ProjectModel.findById(projectId);
+
+    if (!project) {
+      ErrorHandler(res, 404, "Project not found.");
+    }
+
+    if (String(req.user._id) != String(project.lead)) {
+      ErrorHandler(res, 400, "Only lead can edit the project.");
+    }
+
+    if (addedMembers?.length) {
+      addedMembers.map((newMember) => {
+        if (project.members.some((member) => String(member) == newMember)) {
+          ErrorHandler(res, 400, "User already a member.");
+        }
+
+        project.members.push(newMember);
+      });
+    }
+
+    if (deletedMembers?.length) {
+      deletedMembers.forEach((deletedMember) => {
+        if (String(deletedMember) === String(project.lead)) {
+          ErrorHandler(res, 400, "Can't remove lead from members.");
+        }
+
+        project.members = project.members.filter(
+          (member) => !deletedMembers.includes(String(member))
+        );
+      });
+    }
+
+    if (updatedData) {
+      if (updatedData.lead) {
+        const newLead = await UserModel.findById(updatedData.lead);
+
+        if (!newLead)
+          ErrorHandler(res, 404, "User not found can't update lead.");
+
+        if (
+          !project.members.some(
+            (member) => String(member) == String(newLead._id)
+          )
+        ) {
+          ErrorHandler(
+            res,
+            400,
+            "User must be a member of the project to be a lead."
+          );
+        }
+      }
+
+      Object.assign(project, updatedData);
+    }
+
+    const updatedProject = await project.save();
+
+    const populatedProject = await updatedProject.populate(
+      "lead members",
+      "-password -__v -verified"
+    );
+
+    res.status(200).json(populatedProject);
+  }
+);
+
+export { Greet, Get, Add, Update };
