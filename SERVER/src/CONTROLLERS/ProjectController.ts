@@ -33,4 +33,21 @@ const Get = ASYNC_HANDLER(
   }
 );
 
-export { Greet, Get };
+const Add = ASYNC_HANDLER(
+  async (req: Request & { user: UserDocument }, res: Response) => {
+    const { projectName, stateId } = req.body;
+
+    const leadUser = req.user;
+
+    const newProject = await ProjectModel.create({
+      projectName,
+      lead: leadUser._id,
+      members: [leadUser._id],
+      state: stateId,
+    });
+
+    res.status(200).json(newProject);
+  }
+);
+
+export { Greet, Get, Add };
