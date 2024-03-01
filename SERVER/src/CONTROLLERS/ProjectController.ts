@@ -121,4 +121,10 @@ const Update = ASYNC_HANDLER(
   }
 );
 
-export { Greet, Get, Add, Update };
+const GetStates = ASYNC_HANDLER(async (req: Request, res: Response) => {
+  const states = await StateModel.find({});
+
+  res.status(200).json(states);
+});
+
+export { Greet, Get, Add, Update, GetStates };
