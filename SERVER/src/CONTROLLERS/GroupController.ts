@@ -41,11 +41,12 @@ const Get = ASYNC_HANDLER(async (req: Request, res: Response) => {
 
 const Add = ASYNC_HANDLER(
   async (req: Request & { user: UserDocument }, res: Response) => {
-    const { label, style } = req.body;
+    const { label, style, color } = req.body;
 
     const newGroup = await GroupModel.create({
       label,
       style,
+      color,
       user: req.user._id,
     });
 
