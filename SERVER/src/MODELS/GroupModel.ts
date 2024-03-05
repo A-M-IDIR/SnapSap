@@ -5,6 +5,7 @@ import { UserDocument } from "./UserModel.js";
 interface GroupDocument extends Document {
   label: string;
   style: number;
+  color: string;
   user: UserDocument;
   projects: ProjectDocument[];
 }
@@ -12,6 +13,7 @@ interface GroupDocument extends Document {
 const GroupSchema = new Schema<GroupDocument>({
   label: { type: String, required: true, unique: true },
   style: { type: Number, required: true },
+  color: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User" },
   projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
 });
