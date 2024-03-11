@@ -46,6 +46,8 @@ const Add = ASYNC_HANDLER(
       state: stateId,
     });
 
+    await newProject.populate("lead members state", "-password -__v -verified");
+
     res.status(200).json(newProject);
   }
 );
