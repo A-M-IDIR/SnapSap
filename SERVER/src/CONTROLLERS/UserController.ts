@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import bcrypt from "bcryptjs";
 
 import { UserModel, UserDocument } from "../MODELS/UserModel.js";
-import { OtpModel } from "../MODELS/OptModel.js";
+import { OtpModel } from "../MODELS/OtpModel.js";
 
 import EmailHandler from "../UTILS/HANDLERS/EmailHandler.js";
 import ErrorHandler from "../UTILS/HANDLERS/ErrorHandler.js";
