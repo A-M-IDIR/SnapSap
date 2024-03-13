@@ -15,7 +15,7 @@ import RouterHandler from "./UTILS/HANDLERS/RouterHandler.js";
 
 const PORT = process.env.PORT || 5000;
 const APP_NAME = "SNAP-SAP";
-const BASE_ROUTE = "/SNAP";
+const BASE_ROUTE = "/";
 
 const APP = EXPRESS();
 const SERVER = HTTP.createServer(APP);
