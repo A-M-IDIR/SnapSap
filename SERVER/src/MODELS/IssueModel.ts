@@ -3,23 +3,25 @@ import { LogDocument } from "./LogModel.js";
 import { UserDocument } from "./UserModel.js";
 
 interface IssueDocument extends Document {
-  index: number;
   log: LogDocument;
   description: string;
   assignees: UserDocument[];
   dueTime: Date;
   priority: number;
   state: string;
+  logIndex: number;
+  boardIndex: number;
 }
 
 const IssueSchema = new Schema<IssueDocument>({
-  index: { type: Number, required: true },
   log: { type: Schema.Types.ObjectId, ref: "Log" },
   description: { type: String },
-  assignees: [{ type: Schema.Types.ObjectId, ref: "Log" }],
+  assignees: [{ type: Schema.Types.ObjectId, ref: "User" }],
   dueTime: Date,
-  priority: { type: Number, required: true },
-  state: { type: String, required: true },
+  priority: { type: Number, default: 0 },
+  state: { type: String, default: "AWAITING", required: true },
+  logIndex: { type: Number, default: 0 },
+  boardIndex: { type: Number, default: 0 },
 });
 
 const IssueModel = model<IssueDocument>("Issue", IssueSchema);
