@@ -8,6 +8,7 @@ ENV.config();
 /****************** SERVER LAUNCH ******************/
 import EXPRESS from "express";
 import HTTP from "http";
+import MULTER from "multer";
 import CORS from "cors";
 import Error from "./UTILS/MIDDLEWARES/Error.js";
 import GreetHandler from "./UTILS/HANDLERS/GreetHandler.js";
@@ -22,6 +23,8 @@ const SERVER = HTTP.createServer(APP);
 
 APP.use(EXPRESS.json());
 APP.use(EXPRESS.urlencoded({ extended: true }));
+APP.use(MULTER().array());
+
 APP.use(
   CORS({
     origin: "*",
@@ -42,8 +45,9 @@ SERVER.listen(PORT, () => {
 import MONGOOSE from "mongoose";
 
 const MONGO_URI = process.env.MONGO_URI;
+const DB_NAME = "SnapSap";
 
-MONGOOSE.connect(MONGO_URI)
+MONGOOSE.connect(`${MONGO_URI}/${DB_NAME}`)
   .then(() => {
     console.log(COLORS.green.underline(`MONGO-DB CONNECTED.`));
   })
