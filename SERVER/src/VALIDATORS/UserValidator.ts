@@ -3,19 +3,19 @@ import { body } from "express-validator";
 import Validate from "../UTILS/MIDDLEWARES/Validate.js";
 
 const RegisterValidation = [
-  body("first_name").notEmpty().withMessage("FirstName is required"),
-  body("last_name").notEmpty().withMessage("LastName is required"),
-  body("user_name").notEmpty().withMessage("UserName is required"),
+  body("firstName").notEmpty().withMessage("The First-Name Is Required."),
+  body("lastName").notEmpty().withMessage("The Last-Name Is Required."),
+  body("userName").notEmpty().withMessage("The User-Name is Required."),
   body("email")
     .notEmpty()
-    .withMessage("Email is required")
+    .withMessage("The Email Is Required.")
     .isEmail()
-    .withMessage("Invalid email address"),
+    .withMessage("Please Check Your Email."),
   body("password")
     .notEmpty()
-    .withMessage("Passowrd is required")
+    .withMessage("The Password Is Required.")
     .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters long"),
+    .withMessage("Password Must Be Atleast 6 Characters Long."),
   (req: Request, res: Response, next: NextFunction) => {
     Validate(req, res, next);
   },
@@ -24,17 +24,17 @@ const RegisterValidation = [
 const NewOtpValidation = [
   body("email")
     .notEmpty()
-    .withMessage("Email is required")
+    .withMessage("The Email Is Required.")
     .isEmail()
-    .withMessage("Invalid email address"),
+    .withMessage("Please Check Your Email."),
   (req: Request, res: Response, next: NextFunction) => {
     Validate(req, res, next);
   },
 ];
 
 const VerifyUserValidation = [
-  body("userId").notEmpty().withMessage("UserId is required"),
-  body("code").notEmpty().withMessage("Code is required"),
+  body("userId").notEmpty().withMessage("User-Id Is Required"),
+  body("code").notEmpty().withMessage("The Otp Code Is Required"),
   (req: Request, res: Response, next: NextFunction) => {
     Validate(req, res, next);
   },
@@ -43,14 +43,14 @@ const VerifyUserValidation = [
 const LoginValidation = [
   body("email")
     .notEmpty()
-    .withMessage("Email is required")
+    .withMessage("The Email Is Required.")
     .isEmail()
-    .withMessage("Invalid email address"),
+    .withMessage("Please Check Your Email."),
   body("password")
     .notEmpty()
-    .withMessage("Passowrd is required")
+    .withMessage("The Passowrd Is Required")
     .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters long"),
+    .withMessage("Please Check Your Password."),
   (req: Request, res: Response, next: NextFunction) => {
     Validate(req, res, next);
   },
