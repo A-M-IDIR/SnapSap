@@ -15,7 +15,7 @@ export const Auth = ASYNC_HANDLER(
     const token = TokenHandler.Split(req);
 
     if (!token) {
-      ErrorHandler(res, 401, "Unauthorized :: Token not found.");
+      ErrorHandler(res, 401, "Unauthorized :: Token Not Found.");
     }
 
     try {
@@ -24,13 +24,13 @@ export const Auth = ASYNC_HANDLER(
       const user = await UserModel.findById(decodedToken.id);
 
       if (!user) {
-        ErrorHandler(res, 401, "Unauthorized :: User not found.");
+        ErrorHandler(res, 401, "Unauthorized :: User Not Found.");
       }
 
       req.user = user;
       next();
     } catch (error) {
-      ErrorHandler(res, 401, "Unauthorized :: Invalid or expired token.");
+      ErrorHandler(res, 401, "Unauthorized :: Invalid Or Expired Token.");
     }
   }
 );
