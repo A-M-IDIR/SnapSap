@@ -2,9 +2,9 @@ import { Schema, model, Types } from "mongoose";
 
 interface UserDocument {
   _id: Types.ObjectId;
-  first_name: string;
-  last_name: string;
-  user_name: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
   email: string;
   password: string;
   verified: boolean;
@@ -13,13 +13,13 @@ interface UserDocument {
 
 const UserSchema = new Schema<UserDocument>(
   {
-    first_name: { type: String, required: true },
-    last_name: { type: String, required: true },
-    user_name: { type: String, required: true, unique: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    userName: { type: String, required: true, unique: true },
+    avatar: { type: String, required: false },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     verified: { type: Boolean, required: true },
-    avatar: { type: String, required: false },
   },
   { strict: "throw" }
 );
