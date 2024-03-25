@@ -78,12 +78,13 @@ function WithPopUp(props) {
             <StyledPopUp
               position={position}
               as={motion.div}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ type: "spring", stiffness: 700, damping: 30 }}
               key={"POP-UP"}
             >
-              <PopElement />
+              <PopElement popUp={setIsPopUp} />
             </StyledPopUp>
 
             <StyledBackDrop
