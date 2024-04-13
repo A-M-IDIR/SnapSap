@@ -13,11 +13,11 @@ import {
 
 const ROUTER = EXPRESS.Router();
 
-ROUTER.get("/", Greet);
+ROUTER.get("/info", Greet);
+ROUTER.get("/", Auth, Get);
 ROUTER.post("/register", UserValidator.RegisterValidation, Register);
 ROUTER.post("/otp", UserValidator.NewOtpValidation, NewOtp);
 ROUTER.post("/verify", UserValidator.VerifyUserValidation, Verify);
 ROUTER.post("/login", UserValidator.LoginValidation, Login);
-ROUTER.get("/self", Auth, Get);
 
 export { ROUTER as UserRouter };
