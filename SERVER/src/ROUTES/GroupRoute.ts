@@ -14,8 +14,8 @@ const ROUTER = EXPRESS.Router();
 
 ROUTER.use(Auth);
 
-ROUTER.get("/", Greet);
-ROUTER.get("/get", Get);
+ROUTER.get("/info", Greet);
+ROUTER.get("/", Get);
 ROUTER.post("/", Add);
 ROUTER.patch("/", Update);
 ROUTER.delete("/", Delete);
