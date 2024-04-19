@@ -32,6 +32,7 @@
     "socket.io-client": "^4.7.2",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
+    "underscore": "^1.13.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
