@@ -1,0 +1,62 @@
+.TimeTracker {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+
+  width: 100%;
+  padding: 0.5rem 0;
+
+  border-radius: 0.2rem;
+
+  transition: all 0.1s ease;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: rgb(245, 245, 245);
+
+    .View {
+      transform: translateY(-2px);
+    }
+  }
+
+  &:active {
+    background-color: rgb(240, 240, 240);
+
+    .View {
+      transform: translateY(0px);
+    }
+  }
+
+  .Icon {
+    height: 30px;
+
+    svg {
+      path {
+        fill: rgb(10, 0, 55);
+      }
+    }
+  }
+
+  .View {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    width: 100%;
+
+    transition: all 0.1s ease;
+
+    .Info {
+      display: flex;
+      justify-content: space-between;
+
+      width: 100%;
+
+      p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
