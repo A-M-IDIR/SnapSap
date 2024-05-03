@@ -1,8 +1,8 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { QueryParamHandler } from "@/RESOURCES/HANDLERS/QueryParamHandler";
 
@@ -41,7 +41,7 @@ const StyledView = styled.div`
   }
 `;
 
-function WithView({ viewKey, style, children }) {
+function WithView({ children, viewKey, style }) {
   const navigate = useNavigate();
 
   const handleClose = () => {
