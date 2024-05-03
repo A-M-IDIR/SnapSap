@@ -1,0 +1,25 @@
+.PriorityLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 20px;
+  padding: 0 0.2rem;
+
+  border-radius: 0.2rem;
+
+  cursor: pointer;
+  pointer-events: all;
+
+  p {
+    color: rgb(0, 0, 0);
+
+    font-weight: 500;
+    text-align: center;
+    font-size: 0.64rem;
+  }
+
+  svg {
+    width: 14px;
+  }
+}
