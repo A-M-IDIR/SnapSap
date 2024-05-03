@@ -1,10 +1,10 @@
 import React from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 import propTypes from "prop-types";
+import { AnimatePresence, motion } from "framer-motion";
 
-import UseResize from "@/RESOURCES/HOOKS/UseResize";
+import UseResize from "@/RESOURCES/HOOKS/SHARED/UseResize";
 
 const BackDrop = styled.div`
   position: fixed;
@@ -16,14 +16,9 @@ const BackDrop = styled.div`
   height: 100dvh;
 
   background-color: blue;
-  opacity: 0.03;
-
-  cursor: pointer;
 `;
 
-function WithDropMenu(props) {
-  const { children, DropMenu, withBackDrop } = props;
-
+function WithDropMenu({ children, DropMenu, withBackDrop, backDropOpacity }) {
   const [isDropMenu, setIsDropMenu] = React.useState(false);
 
   const { windowWidth } = UseResize();
@@ -35,23 +30,32 @@ function WithDropMenu(props) {
         width: "max-content",
       }}
     >
-      <div onClick={() => setIsDropMenu(!isDropMenu)}>{children}</div>
+      <div
+        style={{ position: "relative" }}
+        onMouseDown={() => setIsDropMenu(!isDropMenu)}
+      >
+        {children}
+      </div>
 
-      {isDropMenu && (
-        <>
-          {DropMenu({ windowWidth, setIsDropMenu })}
+      <AnimatePresence mode="wait">
+        {isDropMenu && (
+          <>
+            {DropMenu({ windowWidth, setIsDropMenu })}
 
-          {withBackDrop && (
-            <BackDrop
-              as={motion.div}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.02 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsDropMenu(false)}
-            ></BackDrop>
-          )}
-        </>
-      )}
+            {withBackDrop && (
+              <BackDrop
+                as={motion.div}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: backDropOpacity != null ? backDropOpacity : 0.02,
+                }}
+                exit={{ opacity: 0 }}
+                onMouseDown={() => setIsDropMenu(false)}
+              ></BackDrop>
+            )}
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -65,6 +69,7 @@ WithDropMenu.propTypes = {
   children: propTypes.element.isRequired,
   DropMenu: propTypes.func,
   withBackDrop: propTypes.bool,
+  backDropOpacity: propTypes.number,
 };
 
 export default WithDropMenu;
