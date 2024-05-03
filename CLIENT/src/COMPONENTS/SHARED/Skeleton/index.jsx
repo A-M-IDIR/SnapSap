@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 
 import C from "./style.module.scss";
 
-function Skeleton(props) {
-  const { theme, ...rest } = props;
-
+function Skeleton({ theme, shadowStyle, ...rest }) {
   return (
     <div
       className={`${C.Skeleton} ${theme === "light" ? C.Light : C.Dark}`}
@@ -18,6 +16,7 @@ function Skeleton(props) {
         initial={{ x: "-100%" }}
         animate={{ x: "100%" }}
         transition={{ repeat: Infinity, repeatDelay: 1, duration: 1 }}
+        style={shadowStyle}
       ></motion.div>
     </div>
   );
