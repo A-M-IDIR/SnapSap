@@ -1,0 +1,47 @@
+.TextArea {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  .Box {
+    overflow-y: scroll;
+
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    min-height: 45px;
+
+    outline: 2px solid rgba(80, 80, 255, 0);
+    border: none;
+    border-radius: 0.2rem;
+    color: rgba(0, 5, 55, 0.8);
+    background-color: rgb(248, 248, 248);
+
+    resize: none;
+
+    font-size: 1.4rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    user-select: none;
+    cursor: text;
+
+    &::placeholder {
+      color: rgb(200, 200, 200);
+    }
+
+    &:hover {
+      background-color: rgb(240, 240, 240);
+    }
+
+    &:focus {
+      background-color: white;
+      outline: 2px solid rgba(80, 80, 255);
+    }
+  }
+}
