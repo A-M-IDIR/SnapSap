@@ -6,46 +6,82 @@
   width: 100%;
 
   .Links {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
 
-    p {
-      color: rgb(70, 70, 70);
+    .Link {
+      display: flex;
 
-      font-size: 0.78rem;
+      p,
+      span {
+        font-size: 0.75rem;
 
-      cursor: pointer;
-    }
+        cursor: pointer;
+      }
 
-    p::after {
-      content: "/";
+      p {
+        padding: 0.1rem 0.3rem;
 
-      margin: 0 0.25rem;
+        background-color: rgba(255, 255, 255, 0.6);
+        color: black;
+        border-radius: 0.1rem;
 
-      user-select: none;
-    }
+        font-weight: 500;
 
-    p:last-child::after {
-      display: none;
-    }
+        transition: 0.1s all;
 
-    p:hover {
-      text-decoration: underline;
+        &:hover {
+          background-color: rgb(200, 200, 200);
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      span {
+        color: white;
+
+        margin: 0 0.3rem;
+      }
     }
   }
 
   .Title {
     position: relative;
+    overflow: hidden;
 
-    height: 40px;
+    width: max-content;
+    margin-top: 0.5rem;
+    padding: 0 0.1rem;
+
+    .Shadow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+
+      width: 100%;
+      height: 90%;
+
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0.3rem;
+    }
 
     h1 {
-      position: absolute;
-      left: 0;
-      bottom: -5px;
+      position: relative;
+      z-index: 2;
 
+      // color: rgb(255, 255, 255);
+      // mix-blend-mode: exclusion;
+
+      font-size: 1.5rem;
       font-weight: 600;
-      color: rgb(30, 30, 30);
     }
   }
 }
