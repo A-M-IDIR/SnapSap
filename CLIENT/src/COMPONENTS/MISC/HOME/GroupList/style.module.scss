@@ -1,0 +1,93 @@
+$BackGroundColor: rgb(248, 248, 248);
+$BackGroundColorG: #ececec;
+
+.GroupList {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  background-color: $BackGroundColor;
+  border-radius: 0.2rem;
+
+  user-select: none;
+
+  .Side {
+    padding: 8px;
+    padding-right: 0px;
+  }
+
+  .Empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    svg {
+      margin-right: 3.5rem;
+    }
+  }
+
+  .List {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 5;
+
+      width: 20px;
+      height: 100%;
+
+      background: linear-gradient(
+        to right,
+        $BackGroundColor 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    &::after {
+      content: "";
+
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 5;
+
+      width: 20px;
+      height: 100%;
+
+      background: linear-gradient(
+        to left,
+        $BackGroundColor 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    .Slide {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.8rem;
+
+      width: max-content;
+      height: 100%;
+      padding: 8px;
+      padding-left: 20px;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+}
