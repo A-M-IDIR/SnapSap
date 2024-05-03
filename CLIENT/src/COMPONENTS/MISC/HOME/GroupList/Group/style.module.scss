@@ -1,0 +1,133 @@
+.Group {
+  position: relative;
+
+  width: 150px;
+  min-width: 150px;
+  height: 80px;
+
+  border-radius: 0.2rem;
+  background-color: rgb(242, 242, 242);
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition: all 0.1s ease;
+
+  .Content {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0.2rem;
+
+    .Label {
+      padding: 0.1rem 0.3rem;
+
+      color: #6e6e6e;
+      border-radius: 0.2rem;
+      background-color: rgb(226, 226, 226);
+
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-transform: uppercase;
+
+      transition: all 0.1s 0.05s ease;
+
+      pointer-events: none;
+    }
+
+    .Icon {
+      border-radius: 0.2rem;
+
+      transition: all 0.1s ease;
+
+      pointer-events: none;
+
+      svg {
+        mix-blend-mode: exclusion;
+      }
+    }
+  }
+
+  .Count {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 22px;
+    height: 22px;
+    padding: 0 0.2rem;
+
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 0.2rem;
+    color: rgb(170, 170, 170);
+
+    font-size: 0.79rem;
+  }
+
+  .Style {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    svg,
+    path,
+    circle {
+      transition: 0.15s all;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(238, 238, 238) !important;
+
+    .Label {
+      transform: translateY(-5px);
+    }
+
+    .Icon {
+      transform: translateY(-5px);
+    }
+  }
+
+  &:active {
+    .Label {
+      transform: translateY(0px);
+    }
+
+    .Icon {
+      transform: translateY(0px);
+    }
+  }
+}
+
+.GroupSelected {
+  .Content .Label {
+    color: rgb(40, 40, 40);
+  }
+}
