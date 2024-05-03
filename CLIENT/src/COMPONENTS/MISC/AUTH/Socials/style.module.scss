@@ -1,0 +1,29 @@
+.Socials {
+  position: absolute;
+  right: 100px;
+  bottom: -20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.3rem;
+
+  height: 44px;
+  padding: 0 0.8rem;
+
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.2rem;
+
+  backdrop-filter: blur(3px);
+
+  transition: 0.2s all;
+
+  @media screen and (max-width: "1000px") {
+    right: initial;
+    left: 30px;
+  }
+
+  .Social {
+    cursor: pointer;
+  }
+}
