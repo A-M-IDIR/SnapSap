@@ -1,7 +1,13 @@
 import React from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+
+const StyledHolder = styled.div`
+  position: relative;
+  z-index: 100;
+`;
 
 const StyledLabel = styled.p`
   position: absolute;
@@ -13,22 +19,25 @@ const StyledLabel = styled.p`
   min-width: max-content;
   padding: 0.2rem 0.4rem;
 
-  background-color: rgb(20, 20, 80) !important;
-  color: white !important;
+  background-color: rgb(20, 20, 80);
+  color: white;
   border-radius: 0.2rem;
 
-  font-size: 0.6rem !important;
+  font-size: 0.6rem;
 
   pointer-events: none;
 `;
 
-const StyledHolder = styled.div`
-  position: relative;
-  z-index: 100;
-`;
-
 function WithLabel({ children, label, labelStyle, style, isBottom }) {
   const [isHover, setIsHover] = React.useState(false);
+
+  const urlParams = new URLSearchParams(useLocation().search);
+
+  React.useEffect(() => {
+    if (urlParams.get("drag")) {
+      setIsHover(false);
+    }
+  }, [urlParams.get("drag")]);
 
   return (
     <StyledHolder
@@ -39,7 +48,7 @@ function WithLabel({ children, label, labelStyle, style, isBottom }) {
       <>{children}</>
 
       <AnimatePresence>
-        {isHover && (
+        {isHover && !urlParams.get("drag") && (
           <StyledLabel
             as={motion.p}
             initial={{ x: "-50%", y: -5, opacity: 0 }}
