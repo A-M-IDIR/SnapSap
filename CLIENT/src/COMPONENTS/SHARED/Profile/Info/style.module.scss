@@ -1,0 +1,23 @@
+.Info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+
+  .InfoContent {
+    display: flex;
+    align-items: center;
+
+    height: 34px;
+    padding: 0 0.6rem;
+
+    border-radius: 0.2rem;
+    background-color: rgb(240, 240, 240);
+    color: rgb(85, 85, 85);
+
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+}
