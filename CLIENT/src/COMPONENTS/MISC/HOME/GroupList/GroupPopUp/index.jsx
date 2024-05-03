@@ -26,16 +26,10 @@ function GroupPopUp({ popUp }) {
     onSuccess: (result) => {
       dispatch(addGroup(result.data));
       popUp(false);
-      AlertHandler(dispatch, "Added !", "success");
+      AlertHandler({ dispatch, message: "Added !", type: "success" });
     },
     onError: (error) => {
-      if (error.response.data.errors) {
-        AlertHandler(dispatch, error.response.data.errors[0].msg);
-
-        return;
-      }
-
-      AlertHandler(dispatch, error.response.data.message);
+      AlertHandler({ dispatch, error });
     },
   });
   /******************** REQUESTS ********************/
