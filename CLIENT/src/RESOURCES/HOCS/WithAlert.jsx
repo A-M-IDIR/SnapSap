@@ -1,49 +1,19 @@
 import React from "react";
 
-import { notification, message } from "antd";
 import { useSelector } from "react-redux";
+import { message } from "antd";
 
 function WithAlert({ children }) {
   const alert = useSelector((state) => state.alertSlice.value);
 
-  // const [api, contextHolder] = notification.useNotification();
-
-  // const openNotification = (type, message) => {
-  //   const config = {
-  //     message: message,
-  //     size: "small",
-  //     placement: "left",
-  //     maxCount: 3,
-  //     style: {
-  //       userSelect: "none",
-  //       padding: "1rem",
-  //     },
-  //   };
-
-  //   if (type == "success") {
-  //     api.success(config);
-  //   } else {
-  //     api.error(config);
-  //   }
-  // };
-
-  // if (error) {
-  //   throw error;
-  // }
-
-  // React.useEffect(() => {
-  //   if (alert) {
-  //     openNotification(alert.type, alert.message);
-  //   }
-  // }, [alert]);
-
   const [messageApi, contextHolder] = message.useMessage();
 
-  const openNotification = (type, content, duration) => {
+  const openNotification = (type, content, duration, style) => {
     const config = {
       type,
       content,
       duration,
+      style,
     };
 
     messageApi.open(config);
@@ -51,7 +21,7 @@ function WithAlert({ children }) {
 
   React.useEffect(() => {
     if (alert) {
-      openNotification(alert.type, alert.message, alert.duration);
+      openNotification(alert.type, alert.message, alert.duration, alert.style);
     }
   }, [alert]);
 
