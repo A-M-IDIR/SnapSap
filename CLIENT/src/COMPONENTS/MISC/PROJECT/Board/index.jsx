@@ -1,99 +1,63 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { DragDropContext } from "react-beautiful-dnd";
 
-import BoardList from "@/COMPONENTS/MISC/PROJECT/BoardList";
+import BoardActions from "@/COMPONENTS/MISC/PROJECT/Board/BoardActions";
+import BoardHeader from "@/COMPONENTS/MISC/PROJECT/Board/BoardHeader";
+import BoardList from "@/COMPONENTS/MISC/PROJECT/Board/BoardList";
+
+import UseRequest from "@/RESOURCES/HOOKS/SHARED/UseRequest";
+import AlertHandler from "@/RESOURCES/HANDLERS/AlertHandler";
+import BoardDropHandler, {
+  organize,
+  sortArraysByIndex,
+} from "@/RESOURCES/HANDLERS/BoardDropHandler";
+import { setIssues } from "@/CONTEXT/MISC/PROJECT/IssueSlice";
+import { boardLists } from "@/RESOURCES/CONSTANTS/Board";
 
 import C from "./style.module.scss";
 
-// THIS IS JUST MOCK DATA
-const assignees = [
-  {
-    avatar:
-      "https://images.unsplash.com/photo-1703371169541-7f743764127e?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    avatar:
-      "https://images.unsplash.com/photo-1704212224803-42e34f022c36?q=80&w=1894&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
-
-const data = [
-  {
-    description: "ITEM_2",
-    assignees,
-    priority: 2,
-    dueTime: "12 Feb",
-    id: "item_2",
-    state: "AWAITING",
-    index: 2,
-  },
-  {
-    description: "ITEM_3",
-    assignees,
-    priority: 4,
-    dueTime: "12 Feb",
-    id: "item_3",
-    state: "AWAITING",
-    index: 3,
-  },
-  {
-    description: "ITEM_1",
-    assignees,
-    priority: 3,
-    dueTime: "12 Feb",
-    id: "item_1",
-    state: "AWAITING",
-    index: 1,
-  },
-  {
-    description:
-      "Ipsum ipsa quo sequi repellendus dignissimos consectetur voluptate nostrum sunt animi.",
-    assignees,
-    priority: 0,
-    dueTime: "12 Feb",
-    id: "item_4",
-    state: "IN_PROGRESS",
-    index: 1,
-  },
-  {
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum ipsa quo sequi repellendus dignissimos consectetur voluptate nostrum sunt animi.",
-    assignees,
-    priority: 1,
-    dueTime: "12 Feb",
-    state: "EVALUATION",
-    index: 1,
-    id: "item_5",
-  },
-  {
-    description: "Lorem ipsum dolor sit amet consectetur",
-    assignees,
-    priority: 4,
-    dueTime: "12 Feb",
-    id: "item_6",
-    state: "COMPLETED",
-    index: 1,
-  },
-];
-
 function Board() {
-  const [items, setItems] = React.useState([]);
+  const dispatch = useDispatch();
+  const queryParams = new URLSearchParams(useLocation().search);
 
-  const organize = (data) => {
-    const groupedItems = {};
+  const issues = useSelector((state) => state.issueSlice.value);
+  const [componentRendered, setComponentRendered] = React.useState(false);
 
-    data.forEach((item) => {
-      const { state } = item;
-      if (!groupedItems[state]) {
-        groupedItems[state] = [];
-      }
+  /******************** REQUESTS ********************/
+  const getIssuesMutation = UseRequest({
+    onSuccess: (result) => {
+      dispatch(setIssues(sortArraysByIndex(organize(result.data))));
+    },
+    onError: (error) => {
+      AlertHandler({ dispatch, error });
+    },
+  });
 
-      groupedItems[state].push(item);
-    });
+  const orderIssuesMutation = UseRequest({
+    onError: (error) => {
+      AlertHandler({ dispatch, error });
+    },
+  });
 
-    return groupedItems;
-  };
+  const updateIssueMutation = UseRequest({
+    onError: (error) => {
+      AlertHandler({ dispatch, error });
+    },
+  });
+
+  const filterIssuesMutation = UseRequest({
+    onSuccess: (result) => {
+      dispatch(setIssues(sortArraysByIndex(organize(result.data))));
+    },
+    onError: (error) => {
+      AlertHandler({ dispatch, error });
+    },
+  });
+  /******************** REQUESTS ********************/
 
   const handleDrop = (e) => {
     const { source, destination } = e;
@@ -113,17 +77,23 @@ function Board() {
       // UPDATE THE INDEX OF EACH ITEM TO MATCH THE NEW ORDER
       // UPDATE THE STATE
 
-      let list = [...items[destination.droppableId]];
+      let list = [...issues[destination.droppableId]];
 
       const [draggedItem] = list.splice(source.index, 1);
 
       list.splice(destination.index, 0, draggedItem);
 
-      list = list.map((item, index) => ({ ...item, index }));
+      list = list.map((item, boardIndex) => ({ ...item, boardIndex }));
 
-      let updatedItems = { ...items };
-      updatedItems[destination.droppableId] = list;
-      setItems(updatedItems);
+      let updatedIssues = { ...issues };
+      updatedIssues[destination.droppableId] = list;
+      dispatch(setIssues(updatedIssues));
+
+      orderIssuesMutation.mutate({
+        route: "issue/reorder",
+        method: "POST",
+        load: { newOrder: list, board: true },
+      });
     } else {
       // GET THE SOURCE & DESTINATION
       // TAKE OUT THE DRAGGED ITEM FROM THE SOURCE LIST
@@ -131,8 +101,10 @@ function Board() {
       // UPDATE THE INDEX OF EACH ITEM IN THE DESTINATION LIST TO MATCH THE NEW ORDER
       // UPDATE THE STATE
 
-      let sourceList = [...items[source.droppableId]];
-      let destinationList = [...items[destination.droppableId]];
+      let sourceList = [...issues[source.droppableId]];
+      let destinationList = issues[destination.droppableId]
+        ? [...issues[destination.droppableId]]
+        : [];
 
       const [draggedItem] = sourceList.splice(source.index, 1);
 
@@ -141,33 +113,113 @@ function Board() {
         state: destination.droppableId,
       });
 
-      destinationList = destinationList.map((item, index) => ({
+      destinationList = destinationList.map((item, boardIndex) => ({
         ...item,
-        index,
+        boardIndex,
       }));
 
-      let updatedItems = { ...items };
-      updatedItems[source.droppableId] = sourceList;
-      updatedItems[destination.droppableId] = destinationList;
-      setItems(updatedItems);
+      let updatedIssues = { ...issues };
+      updatedIssues[source.droppableId] = sourceList;
+      updatedIssues[destination.droppableId] = destinationList;
+      dispatch(setIssues(updatedIssues));
+
+      updateIssueMutation.mutate({
+        route: "issue",
+        method: "PATCH",
+        load: {
+          issueId: draggedItem._id,
+          updatedData: {
+            state: boardLists.find((e) => e.label === destination.droppableId)
+              .stateId,
+          },
+        },
+      });
+      orderIssuesMutation.mutate({
+        route: "issue/reorder",
+        method: "POST",
+        load: { newOrder: sourceList, board: true },
+      });
+      orderIssuesMutation.mutate({
+        route: "issue/reorder",
+        method: "POST",
+        load: { newOrder: destinationList, board: true },
+      });
     }
   };
 
   React.useEffect(() => {
-    setItems(organize(data));
+    const projectId = queryParams.get("id");
+
+    getIssuesMutation.mutate({
+      route: `issue?projectId=${projectId}&board=true`,
+      load: { projectId },
+      method: "GET",
+    });
   }, []);
+
+  React.useEffect(() => {
+    const search = queryParams.get("search");
+    const assignee = queryParams.get("assignee");
+    const sprints = queryParams.get("sprints");
+
+    if (!componentRendered) {
+      setComponentRendered(true);
+
+      return;
+    }
+
+    const filter = {
+      board: true,
+      project: queryParams.get("id"),
+    };
+
+    if (search) filter.summary = search;
+    if (assignee) filter.assignees = assignee;
+    if (sprints) filter.log = sprints.split(",");
+
+    filterIssuesMutation.mutate({
+      route: "issue/find",
+      load: filter,
+      method: "POST",
+    });
+  }, [
+    queryParams.get("search"),
+    queryParams.get("assignee"),
+    queryParams.get("sprints"),
+  ]);
+
+  const handleDragEnd = (e) => {
+    BoardDropHandler(
+      e,
+      orderIssuesMutation,
+      updateIssueMutation,
+      dispatch,
+      setIssues,
+      issues,
+      boardLists
+    );
+  };
 
   return (
     <div className={C.Board}>
-      <DragDropContext onDragEnd={handleDrop}>
-        <BoardList label={"AWAITING"} items={items.AWAITING} />
+      <BoardHeader />
 
-        <BoardList label={"IN_PROGRESS"} items={items.IN_PROGRESS} />
+      <BoardActions />
 
-        <BoardList label={"EVALUATION"} items={items.EVALUATION} />
-
-        <BoardList label={"COMPLETED"} items={items.COMPLETED} />
-      </DragDropContext>
+      <div className={C.Container}>
+        {!getIssuesMutation.isLoading && issues && (
+          <DragDropContext onDragEnd={handleDragEnd}>
+            {boardLists.map((e, i) => (
+              <BoardList
+                label={e.label}
+                issues={issues[e.label]}
+                key={i}
+                index={i}
+              />
+            ))}
+          </DragDropContext>
+        )}
+      </div>
     </div>
   );
 }
