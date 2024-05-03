@@ -24,7 +24,7 @@ import C from "./style.module.scss";
 function ProjectPopUp() {
   const groups = useSelector((state) => state.groupSlice.value);
   const [newProject, setNewProject] = React.useState({
-    stateId: states.STARTED._id,
+    stateId: states.WAITING._id,
   });
 
   const navigate = useNavigate();
