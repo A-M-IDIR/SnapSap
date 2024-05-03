@@ -1,29 +1,22 @@
 import React from "react";
 
-import axios from "axios";
-import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { TokenHandler } from "../HANDLERS/TokenHandler";
+import UseRequest from "@/RESOURCES/HOOKS/SHARED/UseRequest";
+import { TokenHandler } from "@/RESOURCES/HANDLERS/TokenHandler";
+import AlertHandler from "@/RESOURCES/HANDLERS/AlertHandler";
 
 function WithAuth({ children }) {
+  const [loading, setLoading] = React.useState(true);
+
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const urlParams = new URLSearchParams(location.search);
 
-  const handleVerifyUser = async (token) => {
-    try {
-      const response = await axios.get("http://localhost:5000/user/", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const { mutate } = useMutation(handleVerifyUser, {
+  /******************** REQUESTS ********************/
+  const authUserMutation = UseRequest({
     onSuccess: () => {
       if (
         !location.pathname.includes("home") &&
@@ -31,6 +24,8 @@ function WithAuth({ children }) {
       ) {
         navigate("/home?section=projects");
       }
+
+      setLoading(false);
     },
     onError: () => {
       TokenHandler.clearToken();
@@ -38,20 +33,57 @@ function WithAuth({ children }) {
     },
   });
 
-  React.useEffect(() => {
-    const token = TokenHandler.getToken();
+  const verifyUserMutation = UseRequest({
+    onSuccess: () => {
+      AlertHandler({
+        dispatch,
+        message: "Verified !",
+        type: "success",
+        duration: 1,
+      });
+      navigate("/auth?section=login");
+    },
+    onError: (error) => {
+      AlertHandler({ dispatch, error });
+      navigate("/auth?section=login");
+    },
+    isPublic: true,
+  });
+  /******************** REQUESTS ********************/
 
-    if (!token) {
-      TokenHandler.clearToken();
-      if (!location.pathname.includes("auth")) navigate("/auth?section=login");
+  React.useEffect(() => {
+    if (urlParams.get("otp")) {
+      verifyUserMutation.mutate({
+        route: "user/verify",
+        method: "POST",
+        load: {
+          userId: urlParams.get("user"),
+          code: urlParams.get("otp"),
+        },
+      });
 
       return;
     }
 
-    mutate(token);
-  }, [urlParams.get("section")]);
+    const token = TokenHandler.getToken();
+    const user = localStorage.getItem("user");
 
-  return <>{children}</>;
+    if (!token || !user) {
+      TokenHandler.clearToken();
+      localStorage.removeItem("user");
+      if (!location.pathname.includes("auth")) navigate("/auth?section=login");
+
+      setLoading(false);
+      return;
+    }
+
+    authUserMutation.mutate({
+      route: "user",
+      method: "GET",
+    });
+  }, [urlParams.get("section"), urlParams.get("otp")]);
+
+  return <>{!loading && children}</>;
 }
 
 export default WithAuth;
