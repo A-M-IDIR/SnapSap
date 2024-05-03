@@ -1,0 +1,107 @@
+.ImageBrowser {
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  height: 250px;
+
+  border: 1px solid rgb(230, 230, 230);
+  box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 0.3rem;
+
+  pointer-events: all;
+
+  .Header {
+    z-index: 5px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 48px;
+    min-height: 48px;
+    padding: 0.5rem;
+
+    background-color: rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(230, 230, 230);
+  }
+
+  .Container {
+    overflow-y: auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-gap: 10px;
+
+    height: 100%;
+    padding: 10px;
+
+    .Image {
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 100px;
+
+      background-color: rgb(240, 240, 240);
+      border-radius: 0.2rem;
+
+      cursor: pointer;
+
+      transition: 0.1s all ease;
+
+      &:hover {
+        transform: translateY(-2px);
+
+        &::after {
+          opacity: 0.2;
+        }
+      }
+
+      &:active {
+        transform: translateY(2px);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-color: black;
+        opacity: 0;
+
+        transition: 0.1s all ease;
+      }
+
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 100%;
+      }
+    }
+  }
+
+  .Empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+  }
+}
