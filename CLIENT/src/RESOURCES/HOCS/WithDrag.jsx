@@ -3,9 +3,7 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import propTypes from "prop-types";
 
-function WithDrag(props) {
-  const { children, draggableId, index } = props;
-
+function WithDrag({ children, draggableId, index }) {
   return (
     <Draggable draggableId={draggableId} index={index}>
       {(provided, snapshot) => (
@@ -22,9 +20,9 @@ function WithDrag(props) {
 }
 
 WithDrag.propTypes = {
+  children: propTypes.any,
   draggableId: propTypes.string.isRequired,
   index: propTypes.number.isRequired,
-  children: propTypes.any,
 };
 
 export default WithDrag;
