@@ -2,19 +2,19 @@
 
 @font-face {
   font-family: "Brutal";
-  src: url(/public/ASSETS/FONTS/BrutalType-Bold.ttf);
+  src: url(/public/FONTS/BRUTAL/BrutalType-Bold.ttf);
   font-weight: 600;
 }
 
 @font-face {
   font-family: "Brutal";
-  src: url(/public/ASSETS/FONTS/BrutalType-Medium.ttf);
+  src: url(/public/FONTS/BRUTAL/BrutalType-Medium.ttf);
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Brutal";
-  src: url(/public/ASSETS/FONTS/BrutalType-Thin.ttf);
+  src: url(/public/FONTS/BRUTAL/BrutalType-Thin.ttf);
   font-weight: 300;
 }
 
@@ -25,5 +25,62 @@
   margin: 0;
 
   font-family: "Brutal";
-  font-weight: 400;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+body {
+  overflow: hidden;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.7) inset;
+}
+
+.Number {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  width: 50%;
+  height: 39px !important;
+  padding: 0 !important;
+
+  border-radius: 0.2rem;
+}
+
+.ant-input-number-input {
+  font-weight: 600 !important;
+}
+
+.ql-toolbar.ql-snow {
+  border-radius: 4px 4px 0 0 !important;
+  border: 1px solid rgb(222, 222, 222) !important;
+  background-color: white !important;
+}
+.ql-container.ql-snow {
+  border-radius: 0 0 4px 4px !important;
+  border: 1px solid rgb(222, 222, 222) !important;
+  border-top: none !important;
+  color: black !important;
+  width: 100% !important;
+}
+.ql-editor {
+  width: 100% !important;
+  word-wrap: break-all !important;
+  background-color: white !important;
 }
