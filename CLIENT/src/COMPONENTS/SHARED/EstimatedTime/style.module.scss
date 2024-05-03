@@ -1,0 +1,35 @@
+.EstimatedTime {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // gap: 0.3rem;
+
+  min-width: 40px;
+  height: 20px;
+  padding: 0 0.3rem;
+
+  border-radius: 0.15rem;
+  outline: 1.5px solid rgb(240, 240, 240);
+
+  user-select: none;
+  cursor: pointer;
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 11px;
+
+      fill: rgb(190, 190, 190);
+    }
+  }
+
+  p {
+    color: rgb(65, 65, 65);
+
+    font-weight: 500;
+    font-size: 0.68rem;
+  }
+}
