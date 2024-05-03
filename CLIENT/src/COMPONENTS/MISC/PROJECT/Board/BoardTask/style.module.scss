@@ -1,0 +1,66 @@
+.BoardTask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  margin-bottom: 0.5rem;
+
+  background-color: white;
+  outline: 1.5px solid rgb(240, 240, 240);
+  border-radius: 0.2rem;
+
+  cursor: pointer;
+  pointer-events: all;
+  user-select: none;
+
+  .Content {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    padding: 0.5rem;
+
+    pointer-events: none;
+
+    p {
+      min-height: 20px;
+
+      color: rgb(60, 60, 60);
+
+      font-weight: 400;
+      font-size: 0.78rem;
+
+      transition: 0.1s all ease;
+    }
+  }
+
+  .Footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: 0.7rem 0.5rem;
+
+    border-top: 1.5px solid rgb(240, 240, 240);
+
+    pointer-events: all;
+
+    aside {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.3rem;
+
+      .Divider {
+        width: 1px;
+        height: 10px;
+        margin: 0 0.1rem;
+        margin-right: 0.4rem;
+
+        background-color: rgb(220, 220, 220);
+      }
+    }
+  }
+}
