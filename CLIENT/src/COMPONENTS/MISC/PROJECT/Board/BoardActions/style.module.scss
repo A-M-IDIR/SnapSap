@@ -1,0 +1,65 @@
+.BoardActions {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+  min-width: max-content;
+  padding: 20px;
+  padding-bottom: 10px;
+
+  @media screen and (max-width: "900px") {
+    padding: 20px 10px;
+    padding-bottom: 10;
+  }
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    z-index: 5;
+
+    width: 100%;
+    height: 25px;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  aside {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    width: 100%;
+    min-width: max-content;
+  }
+
+  .Right {
+    justify-content: flex-end;
+  }
+
+  .Left {
+    gap: 0rem;
+
+    width: 100%;
+    max-width: 320px;
+
+    .Divider {
+      width: 1px;
+      height: 20px;
+      margin: 0 0.2rem;
+
+      background-color: rgba(235, 235, 235, 0);
+    }
+  }
+}
