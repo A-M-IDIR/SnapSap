@@ -5,7 +5,7 @@ import styled from "styled-components";
 const StyledSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.5rem;
 
   width: 100%;
 
@@ -13,7 +13,7 @@ const StyledSection = styled.div`
     width: max-content;
     padding: 0.2rem 0.4rem;
 
-    color: rgb(90, 90, 90);
+    color: rgb(120, 120, 120);
     background-color: rgb(245, 245, 245);
     border-radius: 0.2rem;
 
@@ -23,7 +23,7 @@ const StyledSection = styled.div`
   }
 `;
 
-function WithSectionLabel({ label, children, labelStyle }) {
+function WithSectionLabel({ children, label, labelStyle }) {
   return (
     <StyledSection>
       <p className="Label" style={labelStyle}>
