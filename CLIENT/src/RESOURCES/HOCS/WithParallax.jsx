@@ -2,9 +2,7 @@ import React from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-function WithParallax(props) {
-  const { speed, reverse, children, isAbsolute } = props;
-
+function WithParallax({ speed, reverse, children, isAbsolute }) {
   const [pos, setPos] = React.useState({ x: 0, y: 0 });
 
   const layer = React.useRef(null);
