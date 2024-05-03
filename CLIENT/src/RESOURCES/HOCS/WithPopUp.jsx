@@ -38,6 +38,7 @@ const StyledPopUp = styled.div`
 
   width: 100dvw;
   height: 100dvh;
+  padding: 30px;
 
   pointer-events: none;
 `;
@@ -57,18 +58,20 @@ const StyledBackDrop = styled.div`
   cursor: initial;
 `;
 
-function WithPopUp(props) {
-  const { children, position, PopElement, ...rest } = props;
-
+function WithPopUp({ children, position, PopElement, ...rest }) {
   const [isPopUp, setIsPopUp] = React.useState(false);
 
-  const handleClick = () => {
-    setIsPopUp(true);
-  };
+  const handleOpen = () => setIsPopUp(true);
+
+  const handleClose = () => setIsPopUp(false);
 
   return (
     <>
-      <div onClick={handleClick} {...rest}>
+      <div
+        onMouseUp={handleOpen}
+        style={{ pointerEvents: isPopUp ? "none" : "initial" }}
+        {...rest}
+      >
         {children}
       </div>
 
@@ -92,7 +95,7 @@ function WithPopUp(props) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.2 }}
               exit={{ opacity: 0 }}
-              onMouseDown={() => setIsPopUp(false)}
+              onClick={handleClose}
             ></StyledBackDrop>
           </>
         )}
