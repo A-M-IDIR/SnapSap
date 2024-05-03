@@ -1,55 +1,83 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import Skeleton from "@/COMPONENTS/SHARED/Skeleton";
-import Button from "@/COMPONENTS/SHARED/Button";
-import WorkMenu from "@/COMPONENTS/MISC/HOME/WorkMenu";
 import InboxMenu from "@/COMPONENTS/MISC/HOME/InboxMenu";
+import Button, { buttonThemes } from "@/COMPONENTS/SHARED/Button";
 
 import WithDropMenu from "@/RESOURCES/HOCS/WithDropMenu";
 import WithPopUp from "@/RESOURCES/HOCS/WithPopUp";
+import UseRequest from "@/RESOURCES/HOOKS/SHARED/UseRequest";
+import { QueryParamHandler } from "@/RESOURCES/HANDLERS/QueryParamHandler";
 import { SvgHandler } from "@/RESOURCES/HANDLERS/SvgHandler";
+import AlertHandler from "@/RESOURCES/HANDLERS/AlertHandler";
 
 import C from "./style.module.scss";
 
 function NavBar() {
-  const LightGrayArgs = {
-    idle: {
-      backgroundColor: "rgb(240, 240, 240)",
-      color: "rgb(60, 60, 60)",
-      iconColor: "rgb(100,100,100)",
+  const [inboxes, setInboxes] = React.useState([]);
+  const [notify, setNotify] = React.useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  /******************** REQUESTS ********************/
+  const getNotificationMutation = UseRequest({
+    onSuccess: (result) => {
+      setInboxes(result.data);
+      const newInboxes = result.data.filter((inbox) => inbox.isRead === false);
+      if (newInboxes.length > 0) {
+        setNotify(true);
+      } else {
+        setNotify(false);
+      }
     },
-    hover: {
-      backgroundColor: "rgb(220, 220, 220)",
-      color: "rgb(60, 60, 60)",
-      iconColor: "rgb(60, 60, 60)",
+    onError: (error) => AlertHandler({ dispatch, error }),
+  });
+  const openInboxMutation = UseRequest({
+    onSuccess: () => {
+      setNotify(false);
     },
-    active: { backgroundColor: "rgb(230, 230, 230)" },
+    onError: (error) => AlertHandler({ dispatch, error }),
+  });
+  /******************** REQUESTS ********************/
+
+  React.useEffect(() => {
+    getNotificationMutation.mutate({
+      route: "user/inbox",
+      method: "GET",
+    });
+
+    // THIS INTERVAL IS TEMPORARY UNTILL SOCKETS ARE ADDED
+    const interval = setInterval(() => {
+      getNotificationMutation.mutate({
+        route: "user/inbox",
+        method: "GET",
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleProfile = () => {
+    navigate(QueryParamHandler.UpdateParam("profile", 1));
+  };
+
+  const handleQuickIssue = () => {
+    navigate(QueryParamHandler.UpdateParam("new_issue", 1));
   };
 
   return (
     <div className={C.NavBar}>
       <aside>
-        <WithDropMenu
-          DropMenu={(props) => (
-            <WorkMenu
-              sizeBreak={600}
-              style={{
-                position: "absolute",
-                bottom: "-12.5px",
-                transform: "translateY(100%)",
-                zIndex: "500",
-              }}
-              {...props}
-            />
-          )}
-          withBackDrop={true}
-        >
-          <Expandable label={"WORK"} />
-        </WithDropMenu>
-
-        <WithPopUp PopElement={() => <></>}>
-          <Button label={"QUICK-ISSUE"} style={{ height: "33px" }} />
-        </WithPopUp>
+        <Button
+          label={"QUICK-ISSUE"}
+          style={{ height: "33px", padding: "0.85rem", fontSize: "0.7rem" }}
+          onMouseDown={handleQuickIssue}
+        />
       </aside>
 
       <aside>
@@ -64,37 +92,45 @@ function NavBar() {
                   transform: "translate(-90.8%, 100%)",
                   zIndex: "500",
                 }}
+                inboxes={inboxes}
+                setInboxes={setInboxes}
                 {...props}
               />
             )}
-            withBackDrop={true}
+            backDropOpacity={0}
+            withBackDrop={false}
           >
             <Button
               icon={SvgHandler.Notification({ width: "13px" })}
-              theme={LightGrayArgs}
-              style={{ width: "36px", height: "36px" }}
+              theme={notify ? buttonThemes.Blue : buttonThemes.LightGray}
+              style={{ width: "40px", height: "36px" }}
+              onMouseUp={() => {
+                if (notify) {
+                  openInboxMutation.mutate({
+                    route: "user/inbox/open",
+                    method: "GET",
+                  });
+                }
+              }}
             />
           </WithDropMenu>
 
           <div className={C.Line}></div>
 
-          <Skeleton
-            style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-          />
+          <div className={C.Profile} onClick={handleProfile}>
+            {user?.avatar ? (
+              <img src={user.avatar} />
+            ) : (
+              <Skeleton
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            )}
+          </div>
         </span>
       </aside>
-    </div>
-  );
-}
-
-function Expandable(props) {
-  const { label } = props;
-
-  return (
-    <div className={C.Expandable}>
-      <p>{label}</p>
-
-      <aside>{SvgHandler.CarretDown()}</aside>
     </div>
   );
 }
