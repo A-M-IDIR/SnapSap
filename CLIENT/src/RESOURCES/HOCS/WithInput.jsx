@@ -2,9 +2,9 @@ import React from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import Button, { buttonThemes } from "../../COMPONENTS/SHARED/Button";
+import Button, { buttonThemes } from "@/COMPONENTS/SHARED/Button";
 
-function WithInput({ children, Input, content, setContent }) {
+function WithInput({ children, Input, content, setContent, disabled }) {
   const [isInput, setIsInput] = React.useState(false);
   const [value, setValue] = React.useState(content);
 
@@ -16,39 +16,40 @@ function WithInput({ children, Input, content, setContent }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ ease: [0.8, 0, 0, 1], duration: 0.2 }}
-          onClick={() => setIsInput(true)}
+          onClick={() => {
+            if (!disabled) setIsInput(true);
+          }}
           key={"CONTENT"}
         >
           {children}
         </motion.div>
       ) : (
-        <>
+        <form
+          style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+          onSubmit={(e) => e.preventDefault()}
+        >
           <motion.div
+            style={{ wordBreak: "break-word" }}
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ ease: [0.8, 0, 0, 1], duration: 0.2 }}
             key={"INPUT"}
-            style={{ wordBreak: "break-word" }}
           >
-            <Input
-              placeholder=""
-              defaultValue={value}
-              onChange={setValue}
-              getEditor={() => {}}
-            />
+            <Input defaultValue={value} onChange={setValue} />
           </motion.div>
 
           <motion.div
+            style={{ display: "flex", gap: "0.5rem" }}
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ ease: [0.8, 0, 0, 1], duration: 0.2, delay: 0.1 }}
             key={"INPUT_BUTTONS"}
-            style={{ display: "flex", gap: "0.5rem" }}
           >
             <Button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setIsInput(false);
                 if (value === "<p><br></p>") {
                   setContent("");
@@ -61,7 +62,8 @@ function WithInput({ children, Input, content, setContent }) {
             />
 
             <Button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setIsInput(false);
                 setValue(content);
               }}
@@ -70,7 +72,7 @@ function WithInput({ children, Input, content, setContent }) {
               label="CANCLE"
             />
           </motion.div>
-        </>
+        </form>
       )}
     </AnimatePresence>
   );
