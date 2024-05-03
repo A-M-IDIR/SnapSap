@@ -8,7 +8,8 @@
   height: 2.2rem;
   padding: 0 1rem;
 
-  background-color: rgb(125, 125, 255);
+  opacity: 0.8;
+  background-color: #074db5;
   color: rgb(255, 255, 255);
   border-radius: 0.2rem;
   outline: none;
@@ -19,19 +20,34 @@
   cursor: pointer;
   user-select: none;
 
-  transition: 0.2s all ease;
+  transition: 0.1s all ease;
+
+  p {
+    transition: 0.1s all ease;
+  }
 
   &:hover {
-    background-color: rgb(100, 100, 255);
-    color: rgb(255, 255, 255);
+    opacity: 1;
 
     svg {
       fill: white;
     }
+
+    svg,
+    p {
+      transform: translateY(-3px);
+    }
   }
 
   &:active {
-    background-color: rgb(125, 125, 255);
+    opacity: 0.8;
+
+    svg,
+    p {
+      transform: translateY(3px);
+    }
+
+    transform: translateY(2px);
   }
 
   svg {
@@ -39,7 +55,7 @@
 
     fill: white;
 
-    transition: 0.15s all ease;
+    transition: 0.1s all ease;
   }
 }
 
