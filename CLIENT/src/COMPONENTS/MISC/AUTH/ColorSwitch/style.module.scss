@@ -1,0 +1,35 @@
+.ColorSwitch {
+  position: absolute;
+  left: -100px;
+  bottom: 80px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 150px;
+  padding: 0.8rem;
+
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.2rem;
+
+  backdrop-filter: blur(3px);
+
+  transition: 0.2s all;
+
+  @media screen and (max-width: "1000px") {
+    bottom: initial;
+    top: 30px;
+    left: initial;
+    right: -10px;
+  }
+
+  .Color {
+    width: 24px;
+    height: 24px;
+
+    border-radius: 0.2rem;
+
+    cursor: pointer;
+  }
+}
