@@ -1,0 +1,52 @@
+$BorderColorN: #d2d2d2;
+$TextColorN: #c0c0c0;
+
+.GroupButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  width: 40px;
+  min-width: 40px;
+  height: 80px;
+
+  border-radius: 0.2rem;
+  border: 1px dashed $BorderColorN;
+  outline: none;
+
+  cursor: pointer;
+
+  transition: all 0.1s ease;
+
+  .Icon {
+    transition: all 0.1s ease;
+  }
+
+  &:hover {
+    border-color: rgba(95, 116, 250, 0.5);
+
+    .Icon {
+      transform: translateY(-5px);
+
+      svg,
+      path {
+        fill: rgba(95, 116, 250, 0.5);
+      }
+    }
+  }
+
+  &:active {
+    border-color: rgba(95, 116, 250, 0.5);
+
+    .Icon {
+      transform: translateY(2px);
+
+      svg,
+      path {
+        fill: rgba(95, 116, 250, 0.5);
+      }
+    }
+  }
+}
