@@ -10,7 +10,7 @@ import C from "./style.module.scss";
 const StyledInput = styled.input`
   background-color: ${(props) => props.theme.idle.backgroundColor};
   border: ${(props) => props.theme.idle.border};
-  color: ${(props) => props.theme.idle.color};
+  color: ${(props) => props.theme.idle.textColor};
 
   &::placeholder {
     color: ${(props) => props.theme.idle.labelColor};
@@ -18,8 +18,8 @@ const StyledInput = styled.input`
 
   &:hover {
     background-color: ${(props) => props.theme.hover.backgroundColor};
+    color: ${(props) => props.theme.hover.textColor};
     border-color: ${(props) => props.theme.hover.borderColor};
-    color: ${(props) => props.theme.hover.color};
 
     &::placeholder {
       color: ${(props) => props.theme.hover.labelColor};
@@ -28,8 +28,8 @@ const StyledInput = styled.input`
 
   &:focus {
     background-color: ${(props) => props.theme.focus.backgroundColor};
+    color: ${(props) => props.theme.focus.textColor};
     border-color: ${(props) => props.theme.focus.borderColor};
-    color: ${(props) => props.theme.focus.color};
 
     &::placeholder {
       color: ${(props) => props.theme.focus.labelColor};
@@ -43,16 +43,17 @@ const StyledIcon = styled.div`
   }
 `;
 
-function SearchBar(props) {
-  const { label, icon, theme, action, fullWidth, ...rest } = props;
-
+function SearchBar({ label, icon, theme, ...rest }) {
   return (
-    <div className={C.SearchBar} style={{ width: fullWidth && "100%" }}>
+    <div className={`${C.SearchBar}`}>
       <StyledInput
         placeholder={label}
         theme={theme}
-        onChange={action}
+        className={C.Input}
         {...rest}
+        id="search"
+        spellCheck={false}
+        autoComplete="off"
       />
 
       <StyledIcon className={C.Icon} theme={theme}>
@@ -63,42 +64,39 @@ function SearchBar(props) {
 }
 
 SearchBar.defaultProps = {
-  label: "Search",
+  label: "SEARCH",
   icon: SvgHandler.Search(),
   theme: {
     idle: {},
     hover: {},
     focus: {},
   },
-  fullWidth: false,
 };
 
 SearchBar.propTypes = {
   label: propTypes.string,
   icon: propTypes.element,
-  action: propTypes.func,
   theme: propTypes.shape({
     idle: propTypes.shape({
       backgroundColor: propTypes.string,
-      color: propTypes.string,
-      border: propTypes.string,
+      textColor: propTypes.string,
       labelColor: propTypes.string,
       iconColor: propTypes.string,
+      border: propTypes.string,
     }).isRequired,
     hover: propTypes.shape({
       backgroundColor: propTypes.string,
-      color: propTypes.string,
-      borderColor: propTypes.string,
+      textColor: propTypes.string,
       labelColor: propTypes.string,
+      borderColor: propTypes.string,
     }).isRequired,
     focus: propTypes.shape({
       backgroundColor: propTypes.string,
-      color: propTypes.string,
-      borderColor: propTypes.string,
+      textColor: propTypes.string,
       labelColor: propTypes.string,
+      borderColor: propTypes.string,
     }).isRequired,
   }),
-  fullWidth: propTypes.bool,
 };
 
 export default SearchBar;
