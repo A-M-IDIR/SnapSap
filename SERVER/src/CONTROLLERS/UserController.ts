@@ -64,7 +64,7 @@ const Register = ASYNC_HANDLER(async (req: Request, res: Response) => {
 
   const emailContent = `
   <p>Click the link below to verify your account:</p>
-  <a href="http://localhost:3000?otp=${code}&user=${newUser._id}">Verify Account</a>
+  <a href="${process.env.SERVER_URL}?otp=${code}&user=${newUser._id}">Verify Account</a>
 `;
 
   EmailHandler(email, "Verify Your Account", emailContent);
