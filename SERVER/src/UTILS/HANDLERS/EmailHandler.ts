@@ -19,7 +19,7 @@ export default function EmailHandler(
     from: process.env.EMAIL_APP,
     to: email,
     subject: subjet,
-    text: content,
+    html: content,
   };
 
   return new Promise((resolve, reject) => {
