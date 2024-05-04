@@ -7,15 +7,15 @@ interface LogDocument extends Document {
   isMain: boolean;
   project: ProjectDocument;
   state: StateDocument;
-  startDate: Date;
-  endDate: Date;
+  startDate?: Date;
+  endDate?: Date;
 }
 
 const LogSchema = new Schema<LogDocument>({
   label: { type: String, required: true },
   isMain: { type: Boolean, default: false },
   project: { type: Schema.Types.ObjectId, ref: "Project", required: true },
-  state: { type: Schema.Types.ObjectId, ref: "State" },
+  state: { type: Schema.Types.ObjectId, ref: "State", required: true },
   startDate: Date,
   endDate: Date,
 });
