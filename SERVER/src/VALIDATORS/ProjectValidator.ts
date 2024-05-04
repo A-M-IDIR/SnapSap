@@ -11,7 +11,7 @@ const AddValidation = [
 ];
 
 const IdValidation = [
-  query("projectId").notEmpty().withMessage("The Project-Id Is Required"),
+  body("projectId").notEmpty().withMessage("The Project-Id Is Required"),
   (req: Request, res: Response, next: NextFunction) => {
     Validate(req, res, next);
   },
