@@ -116,12 +116,27 @@ function Project() {
     }
   }, [QueryParamHandler.GetParam("refetch")]);
 
+  React.useEffect(() => {
+    // THIS INTERVAL IS TEMPORARY UNTILL SOCKETS ARE ADDED
+    const interval = setInterval(() => {
+      getProjectMutation.mutate({
+        route: `project/filter`,
+        method: "POST",
+        load: {
+          projectId: QueryParamHandler.GetParam("id"),
+        },
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <StyledProject>
       <Helmet>
         {section && project && (
           <title>
-            {project.projectTag.toUpperCase()} - {section.toUpperCase()}
+            {project?.projectTag?.toUpperCase()} - {section?.toUpperCase()}
           </title>
         )}
       </Helmet>
