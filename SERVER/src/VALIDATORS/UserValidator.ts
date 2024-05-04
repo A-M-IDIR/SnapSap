@@ -3,8 +3,6 @@ import { body } from "express-validator";
 import Validate from "../UTILS/MIDDLEWARES/Validate.js";
 
 const RegisterValidation = [
-  body("firstName").notEmpty().withMessage("The First-Name Is Required."),
-  body("lastName").notEmpty().withMessage("The Last-Name Is Required."),
   body("userName").notEmpty().withMessage("The User-Name is Required."),
   body("email")
     .notEmpty()
@@ -56,9 +54,36 @@ const LoginValidation = [
   },
 ];
 
+const UpdateUserValidation = [
+  body("updatedData.userName")
+    .optional()
+    .notEmpty()
+    .withMessage("Username cannot be empty."),
+  body("updatedData.email")
+    .optional()
+    .notEmpty()
+    .withMessage("Email cannot be empty.")
+    .isEmail()
+    .withMessage("Invalid email format."),
+  body("updatedData.password")
+    .optional()
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long."),
+  body("currentPassword")
+    .optional()
+    .notEmpty()
+    .withMessage("Current password is required.")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long."),
+  (req: Request, res: Response, next: NextFunction) => {
+    Validate(req, res, next);
+  },
+];
+
 export const UserValidator = {
   RegisterValidation,
   NewOtpValidation,
   VerifyUserValidation,
   LoginValidation,
+  UpdateUserValidation,
 };
