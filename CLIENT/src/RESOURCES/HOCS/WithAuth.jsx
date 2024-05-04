@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import UseRequest from "@/RESOURCES/HOOKS/SHARED/UseRequest";
 import { TokenHandler } from "@/RESOURCES/HANDLERS/TokenHandler";
 import AlertHandler from "@/RESOURCES/HANDLERS/AlertHandler";
+import { QueryParamHandler } from "@/RESOURCES/HANDLERS/QueryParamHandler";
 
 function WithAuth({ children }) {
   const [loading, setLoading] = React.useState(true);
@@ -13,7 +14,6 @@ function WithAuth({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const urlParams = new URLSearchParams(location.search);
 
   /******************** REQUESTS ********************/
   const authUserMutation = UseRequest({
@@ -52,13 +52,13 @@ function WithAuth({ children }) {
   /******************** REQUESTS ********************/
 
   React.useEffect(() => {
-    if (urlParams.get("otp")) {
+    if (QueryParamHandler.GetParam("otp")) {
       verifyUserMutation.mutate({
         route: "user/verify",
         method: "POST",
         load: {
-          userId: urlParams.get("user"),
-          code: urlParams.get("otp"),
+          userId: QueryParamHandler.GetParam("user"),
+          code: QueryParamHandler.GetParam("otp"),
         },
       });
 
@@ -69,6 +69,15 @@ function WithAuth({ children }) {
     const user = localStorage.getItem("user");
 
     if (!token || !user) {
+      if (QueryParamHandler.GetParam("join")) {
+        AlertHandler({
+          dispatch,
+          message: "Please Login Then Try Again.",
+          type: "warning",
+          duration: 3,
+        });
+      }
+
       TokenHandler.clearToken();
       localStorage.removeItem("user");
       if (!location.pathname.includes("auth")) navigate("/auth?section=login");
@@ -81,7 +90,10 @@ function WithAuth({ children }) {
       route: "user",
       method: "GET",
     });
-  }, [urlParams.get("section"), urlParams.get("otp")]);
+  }, [
+    QueryParamHandler.GetParam("section"),
+    QueryParamHandler.GetParam("otp"),
+  ]);
 
   return <>{!loading && children}</>;
 }
