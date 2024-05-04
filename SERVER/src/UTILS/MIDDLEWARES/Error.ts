@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import COLORS from "colors";
 
 function Error(err: Error, req: Request, res: Response, next: NextFunction) {
+  // INTEGRATE THIS LATER WITH THE ERROR-HANDLER
   if (process.env.NODE_ENV === "DEV") {
     const Location = err.stack
       ? err.stack
@@ -22,8 +23,7 @@ function Error(err: Error, req: Request, res: Response, next: NextFunction) {
 
   res.status(StatusCode);
   res.json({
-    message: err.message,
-    status: false,
+    errors: [{ msg: err.message }],
     stack: process.env.NODE_ENV === "PROD" ? null : err.stack,
   });
 }
