@@ -73,7 +73,7 @@ Due to time constraints, comprehensive testing was not prioritized during the de
 <hr>
 
 <h3 align="center">
-  <a href="">VIEW LIVE APP</a> |
+  <a href="https://snapsap.netlify.app/">VIEW LIVE APP</a> |
   <a href="https://github.com/A-M-IDIR/SnapSap/tree/main/CLIENT">VIEW CLIENT</a> |
   <a href="https://github.com/A-M-IDIR/SnapSap/tree/main/SERVER">VIEW SERVER</a>
 </h3>
