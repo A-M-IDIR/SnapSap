@@ -7,14 +7,14 @@ interface GroupDocument extends Document {
   style: number;
   color: string;
   user: UserDocument;
-  projects: ProjectDocument[];
+  projects?: ProjectDocument[];
 }
 
 const GroupSchema = new Schema<GroupDocument>({
-  label: { type: String, required: true, unique: true },
+  label: { type: String, required: true },
   style: { type: Number, required: true },
   color: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: "User" },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
 });
 
