@@ -90,13 +90,14 @@ function Settings() {
     }
   };
 
-  const handleChange = (updatedData) => {
+  const handleChange = (updatedData, deletedMembers) => {
     updatedProjectMutation.mutate({
       route: "project",
       method: "PATCH",
       load: {
         projectId: project._id,
         updatedData,
+        deletedMembers,
       },
     });
   };

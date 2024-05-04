@@ -121,9 +121,7 @@ export const columns = (
                 theme={buttonThemes.LightGray}
                 style={{ width: "30px", height: "30px" }}
                 onMouseUp={() => {
-                  handleChange({
-                    members: project.members.filter((e) => e._id != record._id),
-                  });
+                  handleChange({}, [record._id]);
                   setMembers(
                     project.members.filter((e) => e._id != record._id)
                   );
