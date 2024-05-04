@@ -17,7 +17,7 @@ function DemoInfo({ layer }) {
       <WithCopy content={demoInfo.email}>
         <WithLabel label={"COPY"} labelStyle={{ top: "-25px" }}>
           <div className={C.Field}>
-            <p>@JohnDoe</p>
+            <p>JohnDoe@gmail.com</p>
 
             <div className={C.Icon}>
               {SvgHandler.Email(

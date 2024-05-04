@@ -1,5 +1,5 @@
 export const demoInfo = {
-  email: "@JohnDoe",
+  email: "JohnDoe@gmail.com",
   password: "DemoPass123",
 };
 
