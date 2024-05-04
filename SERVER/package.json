@@ -5,9 +5,11 @@
   "main": "dist/main.js",
   "type": "module",
   "scripts": {
-    "start": "concurrently npm:start:*",
+    "launch": "concurrently npm:start:*",
     "start:ts": "tsc -w",
-    "start:js": "nodemon dist/main.js"
+    "start:js": "nodemon dist/main.js",
+    "build": "tsc",
+    "start": "node ./dist/application.js"
   },
   "author": "",
   "license": "ISC",
