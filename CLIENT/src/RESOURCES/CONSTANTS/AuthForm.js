@@ -5,7 +5,7 @@ export const demoInfo = {
 
 export const socialInfo = {
   linkedIn: "https://www.linkedin.com/in/a-m-idir/",
-  gitHub: "https://github.com/A-M-IDIR",
+  gitHub: "https://github.com/A-M-IDIR/SnapSap",
   cv: "https://read.cv/idir",
 };
 

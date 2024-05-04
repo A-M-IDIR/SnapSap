@@ -17,10 +17,10 @@ function Socials({ layer }) {
         whileTap={{ y: 3 }}
         transition={{ type: "spring", stiffness: 1000, damping: 30 }}
         className={C.Social}
-        href={socialInfo.linkedIn}
+        href={socialInfo.gitHub}
         target="_blank"
       >
-        {SvgHandler.LinkedIn({ width: "22px" }, "#" + queryParams.get("color"))}
+        {SvgHandler.Git({ width: "22px" }, "#" + queryParams.get("color"))}
       </motion.a>
 
       <motion.a
@@ -28,10 +28,10 @@ function Socials({ layer }) {
         whileTap={{ y: 3 }}
         transition={{ type: "spring", stiffness: 1000, damping: 30 }}
         className={C.Social}
-        href={socialInfo.gitHub}
+        href={socialInfo.linkedIn}
         target="_blank"
       >
-        {SvgHandler.Git({ width: "22px" }, "#" + queryParams.get("color"))}
+        {SvgHandler.LinkedIn({ width: "22px" }, "#" + queryParams.get("color"))}
       </motion.a>
 
       <motion.a
