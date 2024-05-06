@@ -14,6 +14,7 @@ import WithLabel from "@/RESOURCES/HOCS/WithLabel";
 import { SvgHandler } from "@/RESOURCES/HANDLERS/SvgHandler";
 import { QueryParamHandler } from "@/RESOURCES/HANDLERS/QueryParamHandler";
 import AlertHandler from "@/RESOURCES/HANDLERS/AlertHandler";
+import { states } from "@/RESOURCES/CONSTANTS/Sprint";
 
 import C from "./style.module.scss";
 
@@ -26,7 +27,12 @@ function BoardActions() {
   /******************** REQUESTS ********************/
   const getLogsMutation = UseRequest({
     onSuccess: (result) => {
-      setLogs(result.data.filter((e) => e.label != "BACK_LOG"));
+      console.log(result.data);
+      setLogs(
+        result.data.filter(
+          (e) => e.label != "BACK_LOG" && e.state._id != states.AWAITING
+        )
+      );
     },
     onError: (error) => {
       AlertHandler({ dispatch, error });
