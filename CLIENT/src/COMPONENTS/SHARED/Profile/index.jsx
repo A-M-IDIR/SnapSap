@@ -36,8 +36,8 @@ function Profile() {
   React.useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    setAvatar(user.avatar);
-    setBanner(user.banner);
+    setAvatar(user?.avatar);
+    setBanner(user?.banner);
   }, []);
 
   const handleLogOut = () => {
@@ -45,7 +45,7 @@ function Profile() {
 
     setTimeout(() => {
       navigate("/auth?section=login&out=true");
-    }, 100);
+    }, 200);
   };
 
   return (
@@ -143,7 +143,7 @@ function Profile() {
           }}
         >
           <Info
-            defaultInfo={JSON.parse(localStorage.getItem("user")).userName}
+            defaultInfo={JSON.parse(localStorage.getItem("user"))?.userName}
             infoLabel={"USER-NAME"}
             infoKey={"userName"}
             infoType={"text"}
@@ -158,7 +158,7 @@ function Profile() {
           }}
         >
           <Info
-            defaultInfo={JSON.parse(localStorage.getItem("user")).email}
+            defaultInfo={JSON.parse(localStorage.getItem("user"))?.email}
             infoLabel={"EMAIL"}
             infoKey={"email"}
             infoType={"email"}
