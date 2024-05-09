@@ -211,7 +211,7 @@ function EndSprint({ _id, label, closedIssues, openIssues }) {
         <Button
           theme={buttonThemes.LightGray}
           style={{ height: "30px" }}
-          label={"CANCLE"}
+          label={"CANCEL"}
           onClick={() => {
             navigate(QueryParamHandler.RemoveParam("sprint"));
           }}

@@ -69,7 +69,7 @@ function WithInput({ children, Input, content, setContent, disabled }) {
               }}
               style={{ height: "30px" }}
               theme={buttonThemes.LightGray}
-              label="CANCLE"
+              label="CANCEL"
             />
           </motion.div>
         </form>

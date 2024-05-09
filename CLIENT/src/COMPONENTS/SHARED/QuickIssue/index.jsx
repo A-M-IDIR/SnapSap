@@ -206,7 +206,7 @@ function QuickIssue() {
 
       <div className={C.Footer}>
         <Button
-          label={"CANCLE"}
+          label={"CANCEL"}
           theme={buttonThemes.LightGray}
           style={{ height: "34px" }}
           onMouseUp={handleCancle}

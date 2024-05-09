@@ -102,7 +102,7 @@ function UpdateInfo({ infoLabel, infoKey, defaultInfo, infoType, popUp }) {
             <Button type="submit" label={"SAVE"} style={{ height: "32px" }} />
 
             <Button
-              label={"CANCLE"}
+              label={"CANCEL"}
               theme={buttonThemes.LightGray}
               style={{ height: "32px" }}
               type="button"
